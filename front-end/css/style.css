@@ -9,7 +9,7 @@ body{
 ul {
     list-style-type: none;
     display: flex;
-    padding-top: 175px;
+    padding-top: 125px;
 }
 li {
     font-size: 25px;

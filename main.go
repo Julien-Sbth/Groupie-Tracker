@@ -9,4 +9,5 @@ func main() {
 	fs := http.FileServer(http.Dir("./front-end"))
 	http.Handle("/", fs)
 	http.ListenAndServe(":8080", nil)
+	test
 }

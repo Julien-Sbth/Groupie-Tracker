@@ -62,8 +62,8 @@ a:hover:before {
     background-color: #333;
     color: #fff;
     padding: 20px;
+    flex: 1;
 }
-
 .infos {
     border-radius: 5px;
     margin-right: 20px;

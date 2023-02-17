@@ -56,28 +56,40 @@ a:hover:before {
     transform: scaleX(1);
 }
 
-.artiste {
-    list-style-type: none;
+.groupe {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
-    border: 1px solid #ffffff;
-    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
 }
 
-.artiste img {
-    width: 150px;
-    height: 150px;
+.infos {
+    border-radius: 5px;
     margin-right: 20px;
-    border-radius: 50%;
+    background-color: #434343;
+    padding: 20px;
 }
 
-.artiste ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: 20px;
+.infos h2 {
+    font-size: 35px;
+    margin-bottom: 20px;
 }
-#album{
+
+.infos ul {
     list-style-type: none;
+    font-size: 25px;
+}
+
+.infos ul li {
+    margin-bottom: 10px;
+}
+
+.photo {
+    border-radius: 15px;
+    width: 300px;
+    height: 300px;
+    background-color: #444;
+    float: left;
+    margin-right: 20px;
 }

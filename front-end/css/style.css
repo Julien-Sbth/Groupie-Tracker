@@ -13,7 +13,6 @@
     justify-content: flex-end;
     align-items: center;
     height: 100px;
-    background-color: rgb(90, 90, 90);
     position: fixed;
 }
 
@@ -23,13 +22,13 @@
     border: solid white 5px;
     padding: 5px;
     border-radius: 10px;
+    float: right;
 }
 
 header {
     display: flex;
     align-items: center;
     height: 100px;
-    background-color: rgb(90, 90, 90);
 }
 
 a {
@@ -37,7 +36,9 @@ a {
     color: #fff;
     position: relative;
 }
-
+#a {
+    color: black;
+}
 a:before {
     content: "";
     position: absolute;
@@ -45,7 +46,7 @@ a:before {
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: #fff;
+    background-color: black;
     visibility: hidden;
     transform: scaleX(0);
     transition: all 0.3s ease-in-out 0s;
@@ -87,9 +88,40 @@ a:hover:before {
 
 .photo {
     border-radius: 15px;
-    width: 300px;
+    width: 200px;
     height: auto;
     background-color: #444;
     float: left;
     margin-right: 20px;
+}
+.photo img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+#logo {
+    border-radius: 175px;
+    width: 120px;
+    height: auto;
+    float: left;
+    background-color: #888;
+}
+/* Tupac Shakur */
+.infos.larger {
+    margin-right: 75px;
+    width: 100%;
+    max-width: 300px;
+    padding: 30px;
+}
+
+.infos.larger h2 {
+    font-size: 40px;
+}
+
+.infos.larger h3 {
+    font-size: 30px;
+}
+
+.infos.larger ul {
+    font-size: 30px;
 }

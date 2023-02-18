@@ -33,7 +33,7 @@ header {
 
 a {
     text-decoration: none;
-    color: #fff;
+    color: white;
     position: relative;
 }
 #a {
@@ -124,4 +124,12 @@ a:hover:before {
 
 .infos.larger ul {
     font-size: 30px;
+}
+footer {
+    background-color: #333333;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    margin-top: 50px;
 }

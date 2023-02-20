@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="front-end/css/style.css">
     <title>Groupie</title>
 </head>
 <body>
@@ -22,25 +22,27 @@
             <img class="photo" src="img/Compston.webp" alt="">
         </div>
         <div class="infos">
-            <a href="InfoGroup/infosNWA.html">
+            <form action="/nwa" class="sign-in-form" method="post">
                 <h1>NWA</h1>
                 <h3>Easy-E, Dr Dre, MC REN, Ice Cube, Yella</h3>
                 <ul>
                     <li id="album">RAP</li>
                 </ul>
-            </a>
+                <button type="submit" id="bouton-info">Plus d'information</button>
+            </form>
         </div>
         <div class="photo">
             <img class="photo" src="img/5728354.webp" alt="">
         </div>
         <div class="infos">
-            <a href="#">
+            <form action="InfoGroup/infosNWA.html" class="sign-in-form" method="post">
                 <h2>Daft Punk</h2>
                 <h3>Thomas Bangalter & Guy-Manuel de Homem-Christo</h3>
                 <ul>
                     <li id="album">Electro</li>
                 </ul>
-            </a>
+                <button type="submit">Plus d'information</button>
+            </form>
         </div>
     </section>
 </div>
@@ -50,25 +52,27 @@
             <img class="photo" src="img/2PAC.jpg" alt="">
         </div>
         <div class="infos larger">
-            <a href="InfoGroup/InfoShakur.html">
+            <form action="InfoGroup/infosNWA.html" class="sign-in-form" method="post">
                 <h2>2PAC</h2>
                 <h3>Dead</h3>
                 <ul>
                     <li id="album">RAP</li>
                 </ul>
-            </a>
+                <button type="submit">Plus d'information</button>
+            </form>
         </div>
         <div class="photo">
             <img class="photo" src="img/Biggie.jpg" alt="">
         </div>
         <div class="infos larger">
-            <a href="#">
+            <form action="InfoGroup/infosNWA.html" class="sign-in-form" method="post">
                 <h2>The Notorious Big</h2>
                 <h3>Biggie</h3>
                 <ul>
                     <li id="album">RAP</li>
                 </ul>
-            </a>
+                <button type="submit">Plus d'information</button>
+            </form>
         </div>
     </section>
 </div>
@@ -78,37 +82,65 @@
             <img class="photo" src="img/Lamar.webp" alt="">
         </div>
         <div class="infos larger">
-            <a href="InfoGroup/infosNWA.html">
+            <form action="InfoGroup/infosNWA.html" class="sign-in-form" method="post">
                 <h2>Kendrick Lamar</h2>
                 <h3>Alive</h3>
                 <ul>
                     <li id="album">RAP</li>
                 </ul>
-            </a>
+                <button type="submit">Plus d'information</button>
+            </form>
         </div>
         <div class="photo">
             <img class="photo" src="img/Warren.jpg" alt="">
         </div>
         <div class="infos">
-            <a href="#">
+            <form action="InfoGroup/infosNWA.html" class="sign-in-form" method="post">
                 <h2>Warren G</h2>
                 <h3>Warren G</h3>
                 <ul>
                     <li id="album">RAP</li>
                 </ul>
-            </a>
+                <button type="submit">Plus d'information</button>
+            </form>
         </div>
     </section>
 </div>
 <footer>
     <ul>
         <div id="footer">
-        <li><a href="#" id="f">azeazeazeazeazeazeaze</a></li>
-        <li><a href="#" id="f">aezazeaezazeaze</a></li>
-        <li><a href="#" id="f">Lazeazeazeazeaze</a></li>
+            <li><a href="#" id="f">azeazeazeazeazeazeaze</a></li>
+            <li><a href="#" id="f">aezazeaezazeaze</a></li>
+            <li><a href="#" id="f">Lazeazeazeazeaze</a></li>
         </div>
     </ul>
 </footer>
 
+<!-- Ajout d'un élément pour afficher les données de l'API -->
+<!-- Ajout d'un élément pour afficher les données de l'API -->
+<div id="json-data"></div>
+
+<!-- Code JavaScript -->
+<!---
+<script>
+    // Récupération de l'élément HTML contenant les données JSON
+    const jsonDataElement = document.getElementById('json-data');
+
+    // Récupération des données de l'API
+    fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(data => {
+            // Transformation des données en chaîne de caractères
+            const jsonDataString = JSON.stringify(data, null, 2);
+            // Affichage des données dans l'élément HTML
+            jsonDataElement.innerHTML = '<pre>' + jsonDataString + '</pre>';
+        })
+        .catch(error => {
+            console.error('Une erreur est survenue :', error);
+            jsonDataElement.innerHTML = 'Une erreur est survenue : ' + error.message;
+        });
+</script>
+--->
 </body>
 </html>
+

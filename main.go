@@ -9,11 +9,11 @@ import (
 
 func main() {
 	// Serve static files from the "front-end" directory
-	fs := http.FileServer(http.Dir("front-end"))
-	http.Handle("/front-end/", http.StripPrefix("/front-end/", fs))
+	http.Handle("/front-end/", http.StripPrefix("/front-end/", http.FileServer(http.Dir("front-end/css"))))
+	HandleTest := http.FileServer(http.Dir("./front-end"))
 
 	// Set up API endpoints
-	http.HandleFunc("/", backend.HandleTest)
+	http.Handle("/", HandleTest)
 	http.HandleFunc("/dates", API.HandleDates)
 	http.HandleFunc("/artist", API.HandleArtists)
 	http.HandleFunc("/data", API.HandleData)

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="front-end/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
     <title>Groupie</title>
 </head>
 <body>
@@ -35,7 +35,7 @@
             <img class="photo" src="img/5728354.webp" alt="">
         </div>
         <div class="infos">
-            <form action="InfoGroup/infosNWA.html" class="sign-in-form" method="post">
+            <form action="/daft" class="sign-in-form" method="post">
                 <h2>Daft Punk</h2>
                 <h3>Thomas Bangalter & Guy-Manuel de Homem-Christo</h3>
                 <ul>
@@ -106,6 +106,66 @@
         </div>
     </section>
 </div>
+<div class="groupes-container">
+    <section class="groupe">
+        <div class="photo">
+            <img class="photo" src="img/Lamar.webp" alt="">
+        </div>
+        <div class="infos larger">
+            <form action="InfoGroup/infosNWA.html" class="sign-in-form" method="post">
+                <h2>Kendrick Lamar</h2>
+                <h3>Alive</h3>
+                <ul>
+                    <li id="album">RAP</li>
+                </ul>
+                <button type="submit">Plus d'information</button>
+            </form>
+        </div>
+        <div class="photo">
+            <img class="photo" src="img/Warren.jpg" alt="">
+        </div>
+        <div class="infos">
+            <form action="InfoGroup/infosNWA.html" class="sign-in-form" method="post">
+                <h2>Warren G</h2>
+                <h3>Warren G</h3>
+                <ul>
+                    <li id="album">RAP</li>
+                </ul>
+                <button type="submit">Plus d'information</button>
+            </form>
+        </div>
+    </section>
+</div>
+<div class="groupes-container">
+    <section class="groupe">
+        <div class="photo">
+            <img class="photo" src="img/Lamar.webp" alt="">
+        </div>
+        <div class="infos larger">
+            <form action="InfoGroup/infosNWA.html" class="sign-in-form" method="post">
+                <h2>Kendrick Lamar</h2>
+                <h3>Alive</h3>
+                <ul>
+                    <li id="album">RAP</li>
+                </ul>
+                <button type="submit">Plus d'information</button>
+            </form>
+        </div>
+        <div class="photo">
+            <img class="photo" src="img/Warren.jpg" alt="">
+        </div>
+        <div class="infos">
+            <form action="InfoGroup/infosNWA.html" class="sign-in-form" method="post">
+                <h2>Warren G</h2>
+                <h3>Warren G</h3>
+                <ul>
+                    <li id="album">RAP</li>
+                </ul>
+                <button type="submit">Plus d'information</button>
+            </form>
+        </div>
+    </section>
+</div>
 <footer>
     <ul>
         <div id="footer">
@@ -119,6 +179,88 @@
 <!-- Ajout d'un élément pour afficher les données de l'API -->
 <!-- Ajout d'un élément pour afficher les données de l'API -->
 <div id="json-data"></div>
+<script>
+    fetch("http://localhost:8080/")
+        .then(response => response.json())
+        .then(data => {
+            // Utilisez les données ici pour les afficher dans votre page web
+            const container = document.querySelector('.groupes-container');
+            for (let i = 0; i < Math.min(data.length, 8); i++) {
+                const groupe = data[i];
+                const section = document.createElement('section');
+                section.classList.add('groupe');
+
+                const photo1 = document.createElement('div');
+                photo1.classList.add('photo');
+                const img1 = document.createElement('img');
+                img1.classList.add('photo');
+                img1.src = groupe.photo1;
+                photo1.appendChild(img1);
+                section.appendChild(photo1);
+
+                const infos1 = document.createElement('div');
+                infos1.classList.add('infos');
+                const form1 = document.createElement('form');
+                form1.action = groupe.action1;
+                form1.method = 'post';
+                const h1 = document.createElement('h1');
+                h1.textContent = groupe.h1;
+                const h3 = document.createElement('h3');
+                h3.textContent = groupe.h3;
+                const ul1 = document.createElement('ul');
+                const li1 = document.createElement('li');
+                li1.id = 'album';
+                li1.textContent = groupe.li1;
+                ul1.appendChild(li1);
+                const button1 = document.createElement('button');
+                button1.type = 'submit';
+                button1.id = 'bouton-info';
+                button1.textContent = 'Plus d\'information';
+                form1.appendChild(h1);
+                form1.appendChild(h3);
+                form1.appendChild(ul1);
+                form1.appendChild(button1);
+                infos1.appendChild(form1);
+                section.appendChild(infos1);
+
+                const photo2 = document.createElement('div');
+                photo2.classList.add('photo');
+                const img2 = document.createElement('img');
+                img2.classList.add('photo');
+                img2.src = groupe.photo2;
+                photo2.appendChild(img2);
+                section.appendChild(photo2);
+
+                const infos2 = document.createElement('div');
+                infos2.classList.add('infos');
+                const form2 = document.createElement('form');
+                form2.action = groupe.action2;
+                form2.method = 'post';
+                const h2 = document.createElement('h2');
+                h2.textContent = groupe.h2;
+                const h32 = document.createElement('h3');
+                h32.textContent = groupe.h32;
+                const ul2 = document.createElement('ul');
+                const li2 = document.createElement('li');
+                li2.id = 'album';
+                li2.textContent = groupe.li2;
+                ul2.appendChild(li2);
+                const button2 = document.createElement('button');
+                button2.type = 'submit';
+                button2.textContent = 'Plus d\'information';
+                form2.appendChild(h2);
+                form2.appendChild(h32);
+                form2.appendChild(ul2);
+                form2.appendChild(button2);
+                infos2.appendChild(form2);
+                section.appendChild(infos2);
+
+                container.appendChild(section);
+            }
+        })
+        .catch(error => console.error(error));
+
+</script>
 
 <!-- Code JavaScript -->
 <!---

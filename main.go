@@ -18,7 +18,6 @@ func main() {
 	http.HandleFunc("/artist", API.HandleArtists)
 	http.HandleFunc("/data", API.HandleData)
 	http.HandleFunc("/location", API.HandleLocations)
-	http.HandleFunc("/info", API.HandleInfo)
 	http.HandleFunc("/relation", API.HandleRelations)
 
 	http.HandleFunc("/nwa", backend.HandleInfoNWA)

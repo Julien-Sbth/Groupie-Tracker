@@ -1,21 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <title>Groupie</title>
+</head>
+<body>
+<h1>The Artist API</h1>
+<header>
+    <img src="img/Compston.webp" alt="" id="logo">
+    <ul id="main">
+        <li id="menu"><a href="#" id="a">Artiste</a></li>
+        <li id="menu"><a href="#" id="a">Groupe</a></li>
+        <li id="menu"><a href="#" id="a">Support Us</a></li>
+    </ul>
+</header>
+<div class="groupes-container">
+    <section class="groupe">
+        <div class="photo">
+            <img class="photo" src="img/Compston.webp" alt="">
+        </div>
+        <div class="infos">
+            <form action="/nwa" class="sign-in-form" method="post">
+                <h1>NWA</h1>
+                <h3>Easy-E, Dr Dre, MC REN, Ice Cube, Yella</h3>
+                <ul>
+                    <li id="album">RAP</li>
+                </ul>
+                <button type="submit" id="bouton-info">Plus d'information</button>
+            </form>
+        </div>
+        <div class="photo">
+            <img class="photo" src="img/5728354.webp" alt="">
+        </div>
+        <div class="infos">
+            <form action="/daft" class="sign-in-form" method="post">
+                <h2>Daft Punk</h2>
+                <h3>Thomas Bangalter & Guy-Manuel de Homem-Christo</h3>
+                <ul>
+                    <li id="album">Electro</li>
+                </ul>
+                <button type="submit">Plus d'information</button>
+            </form>
+        </div>
+    </section>
+</div>
+<div class="groupes-container">
+    <section class="groupe">
+        <div class="photo">
+            <img class="photo" src="img/2PAC.jpg" alt="">
+        </div>
+        <div class="infos larger">
+            <form action="/shakur" class="sign-in-form" method="post">
+                <h2>2PAC</h2>
+                <h3>Dead</h3>
+                <ul>
+                    <li id="album">RAP</li>
+                </ul>
+                <button type="submit">Plus d'information</button>
+            </form>
+        </div>
+        <div class="photo">
+            <img class="photo" src="img/Biggie.jpg" alt="">
+        </div>
+        <div class="infos larger">
+            <form action="/notorious" class="sign-in-form" method="post">
+                <h2>The Notorious Big</h2>
+                <h3>Biggie</h3>
+                <ul>
+                    <li id="album">RAP</li>
+                </ul>
+                <button type="submit">Plus d'information</button>
+            </form>
+        </div>
+    </section>
+</div>
+<div class="groupes-container">
+    <section class="groupe">
+        <div class="photo">
+            <img class="photo" src="img/Lamar.webp" alt="">
+        </div>
+        <div class="infos larger">
+            <form action="/lamar" class="sign-in-form" method="post">
+                <h2>Kendrick Lamar</h2>
+                <h3>Alive</h3>
+                <ul>
+                    <li id="album">RAP</li>
+                </ul>
+                <button type="submit">Plus d'information</button>
+            </form>
+        </div>
+        <div class="photo">
+            <img class="photo" src="img/Warren.jpg" alt="">
+        </div>
+        <div class="infos">
+            <form action="/warren" class="sign-in-form" method="post">
+                <h2>Warren G</h2>
+                <h3>Warren G</h3>
+                <ul>
+                    <li id="album">RAP</li>
+                </ul>
+                <button type="submit">Plus d'information</button>
+            </form>
+        </div>
+    </section>
+</div>
 <form id="searchForm">
     <label for="searchInput">Search:</label>
     <input type="text" id="searchInput" name="searchInput">
-    <select id="searchType" name="searchType">
-        <option value="artist">Artist/Band Name</option>
-        <option value="member">Member</option>
-        <option value="location">Location</option>
-        <option value="firstAlbumDate">First Album Date</option>
-        <option value="creationDate">Creation Date</option>
-    </select>
     <button type="submit">Search</button>
 </form>
 
 <div id="result">
     <h2 id="artistName">Artist/Band Name</h2>
     <p id="memberName">Member</p>
+    <p id="location">Location</p>
+    <p id="firstAlbumDate">First Album Date</p>
 </div>
 
+<footer>
+    <ul>
+        <div id="footer">
+            <li><a href="#" id="f">azeazeazeazeazeazeaze</a></li>
+            <li><a href="#" id="f">aezazeaezazeaze</a></li>
+            <li><a href="#" id="f">Lazeazeazeazeaze</a></li>
+        </div>
+    </ul>
+</footer>
+
+<!-- Ajout d'un élément pour afficher les données de l'API -->
+<!-- Ajout d'un élément pour afficher les données de l'API -->
+<div id="json-data"></div>
 <script>
     // Sample data for the array of objects
     const data = [
@@ -24,7 +140,6 @@
             members: ["John Lennon", "Paul McCartney", "George Harrison", "Ringo Starr"],
             location: "Liverpool, UK",
             firstAlbumDate: "1963",
-            creationDate: "1960",
             page: "beatles.html"
         },
         {
@@ -32,15 +147,21 @@
             members: ["Freddie Mercury", "Brian May", "Roger Taylor", "John Deacon"],
             location: "London, UK",
             firstAlbumDate: "1973",
-            creationDate: "1970",
             page: "queen.html"
+        },
+        {
+            name: "NWA",
+            members: ["2PAC", "2PAC", "2PAC", "2PAC"],
+            location: "2PAC, 2PAC",
+            firstAlbumDate: "1973",
+            page: "/nwa"
         },
         // Add more objects as needed
     ];
 
-    function search(query, type) {
+    function search(query) {
         const results = data.filter(item => {
-            const value = item[type].toLowerCase();
+            const value = item.name.toLowerCase();
             return value.includes(query);
         });
         return results;
@@ -49,43 +170,37 @@
     const searchInput = document.getElementById("searchInput");
     searchInput.addEventListener("input", event => {
         const query = searchInput.value.toLowerCase();
-        const type = document.getElementById("searchType").value;
-        const results = search(query, type);
-        const select = document.getElementById("searchType");
-        select.innerHTML = '';
-        results.forEach(result => {
-            const option = document.createElement('option');
-            option.value = result.page;
-            option.textContent = result.name + ' - ' + type.charAt(0).toUpperCase() + type.slice(1);
-            select.appendChild(option);
-        });
+        const results = search(query);
+        if (results.length > 0) {
+            const artistName = results[0].name;
+            const memberName = results[0].members.join(", ");
+            const location = results[0].location;
+            const firstAlbumDate = results[0].firstAlbumDate;
+            document.getElementById("artistName").textContent = artistName;
+            document.getElementById("memberName").textContent = "Members: " + memberName;
+            document.getElementById("location").textContent = "Location: " + location;
+            document.getElementById("firstAlbumDate").textContent = "First Album Date: " + firstAlbumDate;
+        } else {
+            document.getElementById("artistName").textContent = "Artist/Band Name";
+            document.getElementById("memberName").textContent = "Member";
+            document.getElementById("location").textContent = "";
+            document.getElementById("firstAlbumDate").textContent = "";
+        }
     });
 
     const searchForm = document.getElementById("searchForm");
     searchForm.addEventListener("submit", event => {
         event.preventDefault();
-        const page = document.getElementById("searchType").value;
-        if (page !== '') {
+        const query = searchInput.value.toLowerCase();
+        const results = search(query);
+        if (results.length > 0) {
+            const page = results[0].page;
             window.location.href = page;
         } else {
             alert("No results found.");
         }
     });
-
-    const searchType = document.getElementById("searchType");
-    searchType.addEventListener("change", event => {
-        const type = event.target.value;
-        const name = document.getElementById("searchInput").value;
-        const results = search(name, type);
-        if (results.length > 0) {
-            const artistName = results[0].name;
-            const memberName = results[0].members[0];
-            document.getElementById("artistName").textContent = artistName;
-            document.getElementById("memberName").textContent = memberName;
-        } else {
-            document.getElementById("artistName").textContent = "Artist";
-            document.getElementById("memberName").textContent = "Member";
-        }
-    });
-
 </script>
+</body>
+</html>
+

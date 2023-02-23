@@ -106,19 +106,12 @@
         </div>
     </section>
 </div>
-<form id="searchForm">
-    <label for="searchInput">Search:</label>
-    <input type="text" id="searchInput" name="searchInput">
-    <button type="submit">Search</button>
+<h1>Band Search Results</h1>
+<form action="/search" method="get">
+    <label for="search">Search:</label>
+    <input type="text" id="search" name="search">
+    <button type="submit">Go</button>
 </form>
-
-<div id="result">
-    <h2 id="artistName">Artist/Band Name</h2>
-    <p id="memberName">Member</p>
-    <p id="location">Location</p>
-    <p id="firstAlbumDate">First Album Date</p>
-</div>
-
 <footer>
     <ul>
         <div id="footer">
@@ -128,79 +121,8 @@
         </div>
     </ul>
 </footer>
-
 <!-- Ajout d'un élément pour afficher les données de l'API -->
 <!-- Ajout d'un élément pour afficher les données de l'API -->
-<div id="json-data"></div>
-<script>
-    // Sample data for the array of objects
-    const data = [
-        {
-            name: "The Beatles",
-            members: ["John Lennon", "Paul McCartney", "George Harrison", "Ringo Starr"],
-            location: "Liverpool, UK",
-            firstAlbumDate: "1963",
-            page: "beatles.html"
-        },
-        {
-            name: "Queen",
-            members: ["Freddie Mercury", "Brian May", "Roger Taylor", "John Deacon"],
-            location: "London, UK",
-            firstAlbumDate: "1973",
-            page: "queen.html"
-        },
-        {
-            name: "NWA",
-            members: ["2PAC", "2PAC", "2PAC", "2PAC"],
-            location: "2PAC, 2PAC",
-            firstAlbumDate: "1973",
-            page: "/nwa"
-        },
-        // Add more objects as needed
-    ];
-
-    function search(query) {
-        const results = data.filter(item => {
-            const value = item.name.toLowerCase();
-            return value.includes(query);
-        });
-        return results;
-    }
-
-    const searchInput = document.getElementById("searchInput");
-    searchInput.addEventListener("input", event => {
-        const query = searchInput.value.toLowerCase();
-        const results = search(query);
-        if (results.length > 0) {
-            const artistName = results[0].name;
-            const memberName = results[0].members.join(", ");
-            const location = results[0].location;
-            const firstAlbumDate = results[0].firstAlbumDate;
-            document.getElementById("artistName").textContent = artistName;
-            document.getElementById("memberName").textContent = "Members: " + memberName;
-            document.getElementById("location").textContent = "Location: " + location;
-            document.getElementById("firstAlbumDate").textContent = "First Album Date: " + firstAlbumDate;
-        } else {
-            document.getElementById("artistName").textContent = "Artist/Band Name";
-            document.getElementById("memberName").textContent = "Member";
-            document.getElementById("location").textContent = "";
-            document.getElementById("firstAlbumDate").textContent = "";
-        }
-    });
-
-    const searchForm = document.getElementById("searchForm");
-    searchForm.addEventListener("submit", event => {
-        event.preventDefault();
-        const query = searchInput.value.toLowerCase();
-        const results = search(query);
-        if (results.length > 0) {
-            const page = results[0].page;
-            window.location.href = page;
-        } else {
-            alert("No results found.");
-        }
-    });
 </script>
 </body>
 </html>
-

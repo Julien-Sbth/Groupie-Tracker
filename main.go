@@ -18,9 +18,13 @@ func main() {
 	http.HandleFunc("/artist", API.HandleArtists)
 	http.HandleFunc("/data", API.HandleData)
 	http.HandleFunc("/location", API.HandleLocations)
+	http.HandleFunc("/search", API.HandleSearch)
 	http.HandleFunc("/relation", API.HandleRelations)
 
 	http.HandleFunc("/nwa", backend.HandleInfoNWA)
+	http.HandleFunc("/dion", backend.HandleInfoDion)
+	http.HandleFunc("/soprano", backend.HandleInfoSoprano)
+	http.HandleFunc("/halliday", backend.HandleInfoHalliday)
 	http.HandleFunc("/shakur", backend.HandleInfoShakur)
 	http.HandleFunc("/notorious", backend.HandleInfoNotorious)
 	http.HandleFunc("/lamar", backend.HandleInfoLamar)

@@ -5,8 +5,8 @@ import (
 	"net/http"
 )
 
-func HandleInfoDaftPunk(w http.ResponseWriter, r *http.Request) {
-	tmpl, err := template.ParseFiles("front-end/InfoGroup/InfoDaftPunk.html")
+func HandleInfoJul(w http.ResponseWriter, r *http.Request) {
+	tmpl, err := template.ParseFiles("front-end/InfoGroup/InfoJul.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

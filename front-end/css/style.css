@@ -133,3 +133,40 @@ footer {
     font-family: Arial, sans-serif;
     margin-top: 50px;
 }
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+button{
+    cursor: pointer;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -7,7 +7,7 @@
     <title>Groupie</title>
 </head>
 <body>
-<h1>The Artist API</h1>
+
 <header>
     <img src="img/Compston.webp" alt="" id="logo">
     <ul id="main">
@@ -16,33 +16,42 @@
         <li id="menu"><a href="#" id="a">Support Us</a></li>
     </ul>
 </header>
+<h1>The Artist API</h1>
+<div class="container">
+
+    <form action="/search" method="get">
+        <input type="text" placeholder="Search" name="search">
+        <button type="submit">Search</button>
+    </form>
+</div>
+
 <div class="groupes-container">
     <section class="groupe">
         <div class="photo">
             <img class="photo" src="img/Compston.webp" alt="">
         </div>
         <div class="infos">
-            <form action="/nwa" class="sign-in-form" method="post">
-                <h1>NWA</h1>
+            <a href="/nwa" class="sign-in-form" method="post">
+                <h2>NWA</h2>
                 <h3>Easy-E, Dr Dre, MC REN, Ice Cube, Yella</h3>
                 <ul>
                     <li id="album">RAP</li>
                 </ul>
                 <button type="submit" id="bouton-info">Plus d'information</button>
-            </form>
+            </a>
         </div>
         <div class="photo">
             <img class="photo" src="img/5728354.webp" alt="">
         </div>
         <div class="infos">
-            <form action="/daft" class="sign-in-form" method="post">
+            <a href="/daft" class="sign-in-form" method="post">
                 <h2>Daft Punk</h2>
                 <h3>Thomas Bangalter & Guy-Manuel de Homem-Christo</h3>
                 <ul>
                     <li id="album">Electro</li>
                 </ul>
                 <button type="submit">Plus d'information</button>
-            </form>
+            </a>
         </div>
     </section>
 </div>
@@ -52,27 +61,27 @@
             <img class="photo" src="img/2PAC.jpg" alt="">
         </div>
         <div class="infos larger">
-            <form action="/shakur" class="sign-in-form" method="post">
+            <a href="/shakur"  class="sign-in-form" method="post">
                 <h2>2PAC</h2>
                 <h3>Dead</h3>
                 <ul>
                     <li id="album">RAP</li>
                 </ul>
                 <button type="submit">Plus d'information</button>
-            </form>
+            </a>
         </div>
         <div class="photo">
             <img class="photo" src="img/Biggie.jpg" alt="">
         </div>
         <div class="infos larger">
-            <form action="/notorious" class="sign-in-form" method="post">
+            <a href="/notorious" class="sign-in-form" method="post">
                 <h2>The Notorious Big</h2>
                 <h3>Biggie</h3>
                 <ul>
                     <li id="album">RAP</li>
                 </ul>
                 <button type="submit">Plus d'information</button>
-            </form>
+            </a>
         </div>
     </section>
 </div>
@@ -82,20 +91,20 @@
             <img class="photo" src="img/Lamar.webp" alt="">
         </div>
         <div class="infos larger">
-            <form action="/lamar" class="sign-in-form" method="post">
+            <a href="/lamar" class="sign-in-form" method="post">
                 <h2>Kendrick Lamar</h2>
                 <h3>Alive</h3>
                 <ul>
                     <li id="album">RAP</li>
                 </ul>
                 <button type="submit">Plus d'information</button>
-            </form>
+            </a>
         </div>
         <div class="photo">
             <img class="photo" src="img/Warren.jpg" alt="">
         </div>
         <div class="infos">
-            <form action="/warren" class="sign-in-form" method="post">
+            <a href="/warren" class="sign-in-form" method="post">
                 <h2>Warren G</h2>
                 <h3>Warren G</h3>
                 <ul>
@@ -106,12 +115,6 @@
         </div>
     </section>
 </div>
-<h1>Band Search Results</h1>
-<form action="/search" method="get">
-    <label for="search">Search:</label>
-    <input type="text" id="search" name="search">
-    <button type="submit">Go</button>
-</form>
 <footer>
     <ul>
         <div id="footer">

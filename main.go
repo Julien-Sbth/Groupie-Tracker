@@ -14,32 +14,62 @@ func main() {
 
 	// Set up API endpoints
 	http.Handle("/", HandleTest)
-	http.HandleFunc("/data", API.HandleData)
-	http.HandleFunc("/dates", API.HandleDates)
-	http.HandleFunc("/artist", API.HandleArtists)
 	http.HandleFunc("/search", API.HandleSearch)
-	http.HandleFunc("/location", API.HandleLocations)
-	http.HandleFunc("/relation", API.HandleRelations)
+	http.HandleFunc("/date", API.HandleDates)
 
 	http.HandleFunc("/nwa", backend.HandleInfoNWA)
+	http.HandleFunc("/infoJSONAW", backend.HandleInfoJSONNWA)
+
+	http.HandleFunc("/infoJSONAPS", backend.HandleInfoJSONNaps)
+	http.HandleFunc("/naps", backend.HandleInfoNaps)
+
 	http.HandleFunc("/sch", backend.HandleInfoSCH)
+	http.HandleFunc("/infoJSONSCH", backend.HandleInfoJSONSCH)
+
 	http.HandleFunc("/jul", backend.HandleInfoJul)
+	http.HandleFunc("/infoJSONJul", backend.HandleInfoJSONJul)
 
 	http.HandleFunc("/dion", backend.HandleInfoDion)
+	http.HandleFunc("/infoJSONDion", backend.HandleInfoJSONDion)
+
 	http.HandleFunc("/maes", backend.HandleInfoMaes)
-	http.HandleFunc("/naps", backend.HandleInfoNaps)
+	http.HandleFunc("/infoJSONMaes", backend.HandleInfoJSONMaes)
+
 	http.HandleFunc("/lamar", backend.HandleInfoLamar)
+	http.HandleFunc("/infoJSONLamar", backend.HandleInfoJSONLamar)
+
 	http.HandleFunc("/shakur", backend.HandleInfoShakur)
+	http.HandleFunc("/infoJSONShakur", backend.HandleInfoJSONShakur)
+
 	http.HandleFunc("/kaaris", backend.HandleInfoKaaris)
-	http.HandleFunc("/eminem", backend.HandleInfoEminem)
+	http.HandleFunc("/infoJSONKaaris", backend.HandleInfoJSONKaaris)
+
 	http.HandleFunc("/warren", backend.HandleInfoWarren)
+	http.HandleFunc("/infoJSONWarren", backend.HandleInfoJSONWarren)
+
+	http.HandleFunc("/infoJSONDaftPunk", backend.HandleInfoJSONDaftPunk)
 	http.HandleFunc("/daft", backend.HandleInfoDaftPunk)
+
+	http.HandleFunc("/infoJSONSnoopDog", backend.HandleInfoJSONSnoopDog)
 	http.HandleFunc("/snoop", backend.HandleInfoSnoopDog)
+
 	http.HandleFunc("/soprano", backend.HandleInfoSoprano)
+	http.HandleFunc("/infoJSONSoprano", backend.HandleInfoJSONSoprano)
+
 	http.HandleFunc("/halliday", backend.HandleInfoHalliday)
+	http.HandleFunc("/infoJSONHalliday", backend.HandleInfoJSONHalliday)
+
 	http.HandleFunc("/big", backend.HandleInfoBigflOli)
+	http.HandleFunc("/infoJSONBigflolie", backend.HandleInfoJSONBigflolie)
+
+	http.HandleFunc("/infoJSONEminem", backend.HandleInfoJSONEminem)
+	http.HandleFunc("/eminem", backend.HandleInfoEminem)
+
+	http.HandleFunc("/infoJSONBiggies", backend.HandleInfoJSONBig)
 	http.HandleFunc("/notorious", backend.HandleInfoNotorious)
-	http.HandleFunc("/tentation", backend.HandleInfoXXXtentation)
+
+	http.HandleFunc("/tentation", backend.HandleInfoXXXTentation)
+	http.HandleFunc("/infoJSONXXX", backend.HandleInfoJSONXXXTentation)
 
 	// Start server
 	fmt.Println("Server started on port :8080")

@@ -47,7 +47,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 		artists[i].ID = i + 1
 	}
 
-	tmpl, err := template.ParseFiles("artist.html")
+	tmpl, err := template.ParseFiles("front-end/accueil.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

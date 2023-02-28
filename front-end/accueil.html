@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des artistes</title>
+</head>
+<body>
+<h1>Liste des artistes</h1>
+<ul>
+    {{range .}}
+        <li id="artist{{.ID}}">
+            <img src="{{.ImageURL}}" alt="{{.Name}}" />
+            <h2>{{.Name}}</h2>
+            <p>Albums : {{.Albums}}</p>
+            <p>Pistes : {{.Tracks}}</p>
+            <p><a href="{{.Self}}">Page de l'artiste</a></p>
+        </li>
+    {{end}}
+</ul>
+
+<script>
+    // Exemple de code JavaScript qui utilise les ID des artistes
+    var artist1 = document.getElementById("artist1");
+    console.log(artist1);
+</script>
+</body>
+</html>

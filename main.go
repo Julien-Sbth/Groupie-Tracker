@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
+	"io"
 	"log"
 	"net/http"
 
@@ -34,13 +35,18 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
 
-func homeHandler(w http.ResponseWriter, r *http.Request) {
+func homeHandler(w http.ResponseWriter, _ *http.Request) {
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
 		fmt.Println("Erreur lors de la requête HTTP :", err)
 		return
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+
+		}
+	}(resp.Body)
 
 	var artists []Artist
 	err = json.NewDecoder(resp.Body).Decode(&artists)
@@ -61,5 +67,5 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	tmpl.Execute(w, artists)
+	_ = tmpl.Execute(w, artists)
 }

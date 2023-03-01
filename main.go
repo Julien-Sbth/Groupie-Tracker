@@ -24,13 +24,6 @@ func main() {
 
 	r.HandleFunc("/", homeHandler).Methods("GET")
 
-	// Créer un gestionnaire de fichiers pour le répertoire "front-end"
-	fs := http.Dir("front-end")
-	fileHandler := http.FileServer(fs)
-
-	// Servir les fichiers statiques à partir du chemin d'accès "/front-end/"
-	r.PathPrefix("/front-end/").Handler(http.StripPrefix("/front-end/", fileHandler))
-
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
 
@@ -54,7 +47,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 		artists[i].ID = i + 1
 	}
 
-	tmpl, err := template.ParseFiles("artist.html")
+	tmpl, err := template.ParseFiles("front-end/accueil.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

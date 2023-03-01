@@ -23,6 +23,7 @@ func main() {
 	r := mux.NewRouter()
 
 	r.HandleFunc("/", homeHandler).Methods("GET")
+	r.HandleFunc("/artist/{id}", artistDetailsHandler).Methods("GET")
 
 	// Créer un gestionnaire de fichiers pour le répertoire "front-end/css"
 	fs := http.FileServer(http.Dir("front-end/css"))
@@ -69,4 +70,38 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	tmpl.Execute(w, artists)
+}
+
+func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, ok := vars["id"]
+	if !ok {
+		http.Error(w, "Missing artist ID", http.StatusBadRequest)
+		return
+	}
+
+	resp, err := http.Get(fmt.Sprintf("https://groupietrackers.herokuapp.com/api/artists/%s", id))
+	if err != nil {
+		fmt.Println("Erreur lors de la requête HTTP :", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer resp.Body.Close()
+
+	var artist Artist
+	err = json.NewDecoder(resp.Body).Decode(&artist)
+	if err != nil {
+		fmt.Println("Erreur lors de la lecture de la réponse JSON :", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	tmpl, err := template.ParseFiles("front-end/artist.html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	tmpl.Execute(w, artist)
 }

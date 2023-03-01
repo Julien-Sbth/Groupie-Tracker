@@ -24,6 +24,13 @@ func main() {
 
 	r.HandleFunc("/", homeHandler).Methods("GET")
 
+	// Créer un gestionnaire de fichiers pour le répertoire "front-end"
+	fs := http.Dir("front-end")
+	fileHandler := http.FileServer(fs)
+
+	// Servir les fichiers statiques à partir du chemin d'accès "/front-end/"
+	r.PathPrefix("/front-end/").Handler(http.StripPrefix("/front-end/", fileHandler))
+
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
 

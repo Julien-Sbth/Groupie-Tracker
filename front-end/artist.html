@@ -1,12 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Liste des artistes</title>
-</head>
-<body>
-<h1>Liste des artistes</h1>
-<h2>{{.Name}}</h2>
-<p>Albums : {{.Albums}}</p>
-<p>Pistes : {{.Tracks}}</p>
-</body>
-</html>
+<h1>{{.Name}}</h1>
+<img src="{{.ImageURL}}" alt="{{.Name}}"/>
+
+<h2>Informations</h2>
+<ul>
+    <li><strong>Membres :</strong> {{.Members}}</li>
+    <li><strong>Date de création :</strong> {{.CreationDate}}</li>
+    <li><strong>Premier album :</strong> {{.FirstAlbum}}</li>
+    <li><strong>Concerts :</strong> {{.Dates}}</li>
+    <li><strong>Dates :</strong>{{.Dates}} </li>
+</ul>
+
+<h2>Albums</h2>
+<ul>
+    {{range .FirstAlbum}}
+        <li>{{.}}</li>
+    {{end}}
+</ul>
+<p>{{.CreationDate}}</p>
+<h2>Titres</h2>
+<ul>
+    {{range .Tracks}}
+        <li>{{.}}</li>
+    {{end}}
+</ul>

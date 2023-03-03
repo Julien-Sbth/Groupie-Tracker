@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b8df833-4870-45b4-8de6-92cc5d71773b" name="Changes" comment="" />
+    <list default="true" id="0b8df833-4870-45b4-8de6-92cc5d71773b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/front-end/link.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Groupie-Tracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Groupie-Tracker.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_01_03_2023_09_50__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_01_03_2023_09_50__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/artiste.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/artiste.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/css/artiste.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/css/artiste.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,6 +60,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\SELLIER Louis\OneDrive - Ynov\Documents\Ynov\Projets Ynov\Groupie-Tracker\front-end" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="Groupie-Tracker" />

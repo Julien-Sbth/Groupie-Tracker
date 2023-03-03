@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b8df833-4870-45b4-8de6-92cc5d71773b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/front-end/link.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Groupie-Tracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Groupie-Tracker.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_01_03_2023_09_50__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_01_03_2023_09_50__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_01_03_2023_10_05__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_01_03_2023_10_05__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_01_03_2023_10_08__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_01_03_2023_10_08__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/G.TrackerBlanc.png" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/img/G.TrackerBlanc.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/G.TrackerNoir.png" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/img/G.TrackerNoir.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SC271 carre.png" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/img/SC271 carre.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/artiste.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/artiste.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/css/artiste.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/css/artiste.css" afterDir="false" />
     </list>
@@ -62,6 +64,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\SELLIER Louis\OneDrive - Ynov\Documents\Ynov\Projets Ynov\Groupie-Tracker\front-end\img" />
       <recent name="C:\Users\SELLIER Louis\OneDrive - Ynov\Documents\Ynov\Projets Ynov\Groupie-Tracker\front-end" />
     </key>
   </component>

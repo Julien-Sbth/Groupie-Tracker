@@ -31,13 +31,14 @@ body {
     box-sizing: border-box;
     border-top: 1px solid rgba(255, 255, 255, .1);
     border-bottom: 1px solid black;
-    transition: .4s;
 }
-ul li:hover a{
+ul li:hover i{
     padding-left: 10px;
 }
 #Menu ul a i{
     padding-right: 10px;
+    font-size:24px;
+    transition: .4s;
 }
 .fa-file-code{
     margin-left: 3px;

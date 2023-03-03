@@ -1,73 +1,110 @@
-/* Styles pour la div principale */
-#main {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    box-shadow: 5px 5px 15px #ddd;
-}
-
-/* Styles pour le titre */
-h1 {
-    font-size: 48px;
-    text-align: center;
-    margin-top: 0;
-    color: #222;
-    text-shadow: 2px 2px 3px #ddd;
-}
-
-/* Styles pour le sous-titre */
-h2 {
-    font-size: 36px;
-    color: #0080ff;
-    text-align: center;
-    margin-top: 50px;
-}
-
-/* Styles pour le texte principal */
-p {
-    font-size: 24px;
-    line-height: 1.5;
-    margin: 20px 0;
-}
-
-/* Styles pour les liens */
-a {
-    text-decoration: none;
-    color: #0080ff;
-    font-weight: bold;
-}
-
-/* Styles pour la liste */
-ul {
-    list-style: none;
+*{
+    margin: 0;
     padding: 0;
-    margin: 50px 0;
+    text-decoration: none;
+    list-style: none;
 }
+body {
 
-/* Styles pour les éléments de la liste */
-li {
-    margin: 30px 0;
-    padding: 30px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 5px 5px 15px #ddd;
 }
-
-/* Styles pour les titres de section */
-h3 {
-    font-size: 24px;
-    color: black;
-    margin: 20px 0;
+#Menu{
+    position: fixed;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #042331;
+    transition: all .5s ease;
 }
-
-/* Styles pour les images */
-img {
+#Menu img{
+    height: 160px;
+    width: 160px;
+    margin-left: 45px;
+}
+#Menu ul a {
     display: block;
-    margin: 0 auto;
-    max-width: 100%;
-    height: auto;
-    box-shadow: 5px 5px 15px #ddd;
+    height: 100%;
+    width: 100%;
+    line-height: 65px;
+    font-size: 20px;
+    color: white;
+    padding-left: 30px;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+    border-bottom: 1px solid black;
 }
+ul li:hover i{
+    padding-left: 10px;
+}
+#Menu ul a i{
+    padding-right: 10px;
+    font-size:24px;
+    transition: .4s;
+}
+.fa-file-code{
+    margin-left: 3px;
+    margin-right: 4px;
+}
+#check{
+    display: none;
+}
+label #btn, label #cancel{
+    position: absolute;
+    cursor: pointer;
+    background: #042331;
+    border-radius: 3px;
+    padding: 6px 12px;
+}
+label #btn{
+    left: 40px;
+    top: 25px;
+    font-size: 35px;
+    color: white;
+    transition: all .5s;
+
+}
+label #cancel{
+    z-index: 1111;
+    left: -195px;
+    top: 17px;
+    font-size: 30px;
+    color: #0a5275;
+    padding: 4px 9px;
+    transition: all .5s ease;
+}
+#check:checked ~ #Menu{
+    left: 0;
+}
+#check:checked ~ label #btn{
+    left: 250px;
+    opacity: 0;
+    pointer-events: none;
+}
+#check:checked ~ label #cancel{
+    left: 195px
+}
+
+
+
+#container{
+    display: flex;
+}
+#section1{
+    width: 50%;
+    background-color: darksalmon;
+}
+#section2{
+    width: 50%;
+    background-color: #ffe5e5;
+    position: fixed;
+    display: flex;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+}
+#artistImage{
+    width: 500px;
+    height: 500px;
+}
+

@@ -1,0 +1,17 @@
+Index: .idea/workspace.xml
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,7 +4,10 @@
+     <option name="autoReloadType" value="ALL" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="0b8df833-4870-45b4-8de6-92cc5d71773b" name="Changes" comment="" />
++    <list default="true" id="0b8df833-4870-45b4-8de6-92cc5d71773b" name="Changes" comment="">
++      <change beforePath="$PROJECT_DIR$/artist.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/accueil.html" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

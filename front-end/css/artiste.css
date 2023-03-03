@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Styles pour le titre */
 h1 {
     font-size: 48px;
@@ -35,26 +36,42 @@ ul {
     padding: 0;
     margin: 50px 0;
     text-align: center;
+=======
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+>>>>>>> 8c941a6de197078f6cb14e3c920d83817b1c1ca1
 }
+body {
 
+<<<<<<< HEAD
 /* Styles pour les éléments de la liste */
 li {
     width: 25%;
     float: left;
     padding: 25px;
     box-sizing: border-box;
+=======
+>>>>>>> 8c941a6de197078f6cb14e3c920d83817b1c1ca1
 }
-
-/* Styles pour les titres de section */
-h3 {
-    font-size: 24px;
-    color: black;
-    margin: 20px 0;
+#Menu{
+    position: fixed;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #042331;
+    transition: all .5s ease;
 }
-
-/* Styles pour les images */
-img {
+#Menu img{
+    height: 160px;
+    width: 160px;
+    margin-left: 45px;
+}
+#Menu ul a {
     display: block;
+<<<<<<< HEAD
     margin: 0 auto;
     max-width: 100%;
     height: auto;
@@ -78,3 +95,91 @@ img {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+=======
+    height: 100%;
+    width: 100%;
+    line-height: 65px;
+    font-size: 20px;
+    color: white;
+    padding-left: 30px;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+    border-bottom: 1px solid black;
+}
+ul li:hover i{
+    padding-left: 10px;
+}
+#Menu ul a i{
+    padding-right: 10px;
+    font-size:24px;
+    transition: .4s;
+}
+.fa-file-code{
+    margin-left: 3px;
+    margin-right: 4px;
+}
+#check{
+    display: none;
+}
+label #btn, label #cancel{
+    position: absolute;
+    cursor: pointer;
+    background: #042331;
+    border-radius: 3px;
+    padding: 6px 12px;
+}
+label #btn{
+    left: 40px;
+    top: 25px;
+    font-size: 35px;
+    color: white;
+    transition: all .5s;
+
+}
+label #cancel{
+    z-index: 1111;
+    left: -195px;
+    top: 17px;
+    font-size: 30px;
+    color: #0a5275;
+    padding: 4px 9px;
+    transition: all .5s ease;
+}
+#check:checked ~ #Menu{
+    left: 0;
+}
+#check:checked ~ label #btn{
+    left: 250px;
+    opacity: 0;
+    pointer-events: none;
+}
+#check:checked ~ label #cancel{
+    left: 195px
+}
+
+
+
+#container{
+    display: flex;
+}
+#section1{
+    width: 50%;
+    background-color: darksalmon;
+}
+#section2{
+    width: 50%;
+    background-color: #ffe5e5;
+    position: fixed;
+    display: flex;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+}
+#artistImage{
+    width: 500px;
+    height: 500px;
+}
+
+>>>>>>> 8c941a6de197078f6cb14e3c920d83817b1c1ca1

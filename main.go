@@ -32,7 +32,7 @@ func main() {
 	r := mux.NewRouter()
 
 	r.HandleFunc("/", homeHandler).Methods("GET")
-	r.HandleFunc("/artist/{id}", artistDetailsHandler).Methods("GET")
+	r.HandleFunc("/index/{id}", artistDetailsHandler).Methods("GET")
 	r.HandleFunc("/date/{id}", datesHandler).Methods("GET")
 
 	fs := http.FileServer(http.Dir("front-end/css"))
@@ -102,7 +102,7 @@ func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tmpl, err := template.ParseFiles("front-end/artist.html")
+	tmpl, err := template.ParseFiles("front-end/index.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

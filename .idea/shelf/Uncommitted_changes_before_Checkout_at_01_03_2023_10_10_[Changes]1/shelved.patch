@@ -1,0 +1,74 @@
+Index: front-end/css/shakur.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* Styles pour la div principale */\r\n#main {\r\n    width: 80%;\r\n    margin: 0 auto;\r\n    padding: 20px;\r\n    background-color: #f0f0f0;\r\n    border: 1px solid #ccc;\r\n    box-shadow: 5px 5px 15px #ddd;\r\n}\r\n\r\n/* Styles pour le titre */\r\nh1 {\r\n    font-size: 48px;\r\n    text-align: center;\r\n    margin-top: 0;\r\n    color: #222;\r\n    text-shadow: 2px 2px 3px #ddd;\r\n}\r\n\r\n/* Styles pour le sous-titre */\r\nh2 {\r\n    font-size: 36px;\r\n    color: #0080ff;\r\n    text-align: center;\r\n    margin-top: 50px;\r\n}\r\n\r\n/* Styles pour le texte principal */\r\np {\r\n    font-size: 24px;\r\n    line-height: 1.5;\r\n    margin: 20px 0;\r\n}\r\n\r\n/* Styles pour les liens */\r\na {\r\n    text-decoration: none;\r\n    color: #0080ff;\r\n    font-weight: bold;\r\n}\r\n\r\n/* Styles pour la liste */\r\nul {\r\n    list-style: none;\r\n    padding: 0;\r\n    margin: 50px 0;\r\n}\r\n\r\n/* Styles pour les éléments de la liste */\r\nli {\r\n    margin: 30px 0;\r\n    padding: 30px;\r\n    background-color: #fff;\r\n    border: 1px solid #ccc;\r\n    border-radius: 5px;\r\n    box-shadow: 5px 5px 15px #ddd;\r\n}\r\n\r\n/* Styles pour les titres de section */\r\nh3 {\r\n    font-size: 24px;\r\n    color: black;\r\n    margin: 20px 0;\r\n}\r\n\r\n/* Styles pour les images */\r\nimg {\r\n    display: block;\r\n    margin: 0 auto;\r\n    max-width: 100%;\r\n    height: auto;\r\n    box-shadow: 5px 5px 15px #ddd;\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front-end/css/shakur.css b/front-end/css/shakur.css
+--- a/front-end/css/shakur.css	
++++ b/front-end/css/shakur.css	
+@@ -1,30 +1,3 @@
+-/* Styles pour la div principale */
+-#main {
+-    width: 80%;
+-    margin: 0 auto;
+-    padding: 20px;
+-    background-color: #f0f0f0;
+-    border: 1px solid #ccc;
+-    box-shadow: 5px 5px 15px #ddd;
+-}
+-
+-/* Styles pour le titre */
+-h1 {
+-    font-size: 48px;
+-    text-align: center;
+-    margin-top: 0;
+-    color: #222;
+-    text-shadow: 2px 2px 3px #ddd;
+-}
+-
+-/* Styles pour le sous-titre */
+-h2 {
+-    font-size: 36px;
+-    color: #0080ff;
+-    text-align: center;
+-    margin-top: 50px;
+-}
+-
+ /* Styles pour le texte principal */
+ p {
+     font-size: 24px;
+@@ -48,7 +21,7 @@
+ 
+ /* Styles pour les éléments de la liste */
+ li {
+-    margin: 30px 0;
++    margin: 2px 0;
+     padding: 30px;
+     background-color: #fff;
+     border: 1px solid #ccc;
+@@ -56,18 +29,14 @@
+     box-shadow: 5px 5px 15px #ddd;
+ }
+ 
+-/* Styles pour les titres de section */
+-h3 {
+-    font-size: 24px;
+-    color: black;
+-    margin: 20px 0;
+-}
+-
+ /* Styles pour les images */
+ img {
+     display: block;
+     margin: 0 auto;
+-    max-width: 100%;
+     height: auto;
+     box-shadow: 5px 5px 15px #ddd;
++    border-radius: 5000px;
++}
++.info {
++    text-align: center;
+ }
+\ No newline at end of file

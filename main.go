@@ -10,28 +10,25 @@ import (
 )
 
 type Artist struct {
-	ID           int      `json:"id"`
-	Name         string   `json:"name"`
-	Albums       string   `json:"albums"`
-	Tracks       string   `json:"tracks"`
-	Self         string   `json:"self"`
-	ImageURL     string   `json:"image"`
-	CreationDate int64    `json:"creationDate"`
-	Members      []string `json:"members"`
-	FirstAlbum   string   `json:"FirstAlbum"`
-	Locations    string   `json:"locations"`
-	ConcertDate  string   `json:"ConcertDate"`
-	Dates        []string `json:"dates"`
-}
-type Dates struct {
-	ID int `json:"id"`
+	ID           int         `json:"id"`
+	Name         string      `json:"name"`
+	Albums       string      `json:"albums"`
+	Tracks       string      `json:"tracks"`
+	Self         string      `json:"self"`
+	ImageURL     string      `json:"image"`
+	CreationDate int64       `json:"creationDate"`
+	Members      []string    `json:"members"`
+	FirstAlbum   string      `json:"FirstAlbum"`
+	Locations    string      `json:"locations"`
+	ConcertDate  string      `json:"ConcertDate"`
+	Dates        interface{} `json:"dates"`
 }
 
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", homeHandler).Methods("GET")
-	r.HandleFunc("/artist/{id}", artistDetailsHandler).Methods("GET")
-	r.HandleFunc("/date/{id}", datesHandler).Methods("GET")
+	r.HandleFunc("/index/{id}", artistDetailsHandler).Methods("GET")
+	r.HandleFunc("/date/", datesHandler).Methods("GET")
 	fs := http.FileServer(http.Dir("front-end/css"))
 	cssHandler := http.StripPrefix("/css/", fs)
 	r.PathPrefix("/css/").Handler(cssHandler)
@@ -64,36 +61,39 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	tmpl.Execute(w, artists)
 }
-func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	id, ok := vars["id"]
-	if !ok {
-		http.Error(w, "Missing artist ID", http.StatusBadRequest)
-		return
-	}
-	resp, err := http.Get(fmt.Sprintf("https://groupietrackers.herokuapp.com/api/artists/%s", id))
+func getArtistWithDates(id string) (*Artist, error) {
+	artistURL := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/artists/%s", id)
+	datesURL := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/dates/%s", id)
+
+	artistResp, err := http.Get(artistURL)
 	if err != nil {
-		fmt.Println("Erreur lors de la requête HTTP :", err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
+		return nil, fmt.Errorf("failed to get artist: %v", err)
 	}
-	defer resp.Body.Close()
+	defer artistResp.Body.Close()
+
 	var artist Artist
-	err = json.NewDecoder(resp.Body).Decode(&artist)
+	err = json.NewDecoder(artistResp.Body).Decode(&artist)
 	if err != nil {
-		fmt.Println("Erreur lors de la lecture de la réponse JSON :", err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
+		return nil, fmt.Errorf("failed to decode artist response: %v", err)
 	}
-	tmpl, err := template.ParseFiles("front-end/artiste.html")
+
+	datesResp, err := http.Get(datesURL)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
+		return nil, fmt.Errorf("failed to get dates: %v", err)
 	}
-	artist.ConcertDate = fmt.Sprintf("/date/{id}%s", id)
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	tmpl.Execute(w, artist)
+	defer datesResp.Body.Close()
+
+	var dates interface{}
+	err = json.NewDecoder(datesResp.Body).Decode(&dates)
+	if err != nil {
+		return nil, fmt.Errorf("failed to decode dates response: %v", err)
+	}
+
+	artist.Dates = dates
+
+	return &artist, nil
 }
+
 func datesHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, ok := vars["id"]
@@ -101,25 +101,41 @@ func datesHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Missing artist ID", http.StatusBadRequest)
 		return
 	}
-	resp, err := http.Get(fmt.Sprintf("https://groupietrackers.herokuapp.com/api/dates%s", id))
+
+	artist, err := getArtistWithDates(id)
 	if err != nil {
-		fmt.Println("Erreur lors de la requête HTTP :", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	defer resp.Body.Close()
-	var dates []Dates
-	err = json.NewDecoder(resp.Body).Decode(&dates)
-	if err != nil {
-		fmt.Println("Erreur lors de la lecture de la réponse JSON :", err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	tmpl, err := template.ParseFiles("front-end/artiste.html")
+
+	tmpl, err := template.ParseFiles("front-end/index.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	tmpl.Execute(w, dates)
+	tmpl.Execute(w, artist)
+}
+
+func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, ok := vars["id"]
+	if !ok {
+		http.Error(w, "Missing artist ID", http.StatusBadRequest)
+		return
+	}
+
+	artist, err := getArtistWithDates(id)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	tmpl, err := template.ParseFiles("front-end/index.html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	tmpl.Execute(w, artist)
 }

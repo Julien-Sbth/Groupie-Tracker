@@ -108,7 +108,7 @@ func datesHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tmpl, err := template.ParseFiles("front-end/index.html")
+	tmpl, err := template.ParseFiles("front-end/artiste.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -131,7 +131,7 @@ func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tmpl, err := template.ParseFiles("front-end/index.html")
+	tmpl, err := template.ParseFiles("front-end/artiste.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

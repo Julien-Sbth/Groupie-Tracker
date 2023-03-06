@@ -4,15 +4,15 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b8df833-4870-45b4-8de6-92cc5d71773b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_01_03_2023_10_05__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_01_03_2023_10_05__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_01_03_2023_10_08__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_01_03_2023_10_08__Changes_.xml" afterDir="false" />
+    <list default="true" id="d293edfd-672e-4430-ab3b-e79a2bea3bcd" name="Changes" comment="[EDIT] dates main &amp; html">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/G.TrackerBlanc.png" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/img/G.TrackerBlanc.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/G.TrackerNoir.png" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/img/G.TrackerNoir.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SC271 carre.png" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/img/SC271 carre.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/artiste.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/artiste.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/css/artiste.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/css/artiste.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Groupie-Tracker" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Styles pour la div principale .txt" beforeDir="false" afterPath="$PROJECT_DIR$/Styles pour la div principale .txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/accueil.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/accueil.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/artiste.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,14 +26,16 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file://$PROJECT_DIR$/../../../../../../../Program Files/Go" />
+  <component name="GOROOT" url="file://$PROJECT_DIR$/../../../Program Files/Go" />
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="Branche_Louis" />
+        <entry key="$PROJECT_DIR$/Groupie-Tracker" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -57,13 +59,16 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/SELLIER Louis&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/julie&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\julie\Nouveau dossier (2)" />
       <recent name="C:\Users\SELLIER Louis\OneDrive - Ynov\Documents\Ynov\Projets Ynov\Groupie-Tracker\front-end\img" />
       <recent name="C:\Users\SELLIER Louis\OneDrive - Ynov\Documents\Ynov\Projets Ynov\Groupie-Tracker\front-end" />
     </key>
@@ -72,7 +77,6 @@
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="Groupie-Tracker" />
       <working_directory value="$PROJECT_DIR$" />
-      <go_parameters value="-i" />
       <kind value="FILE" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
@@ -81,7 +85,6 @@
     <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
       <module name="Groupie-Tracker" />
       <working_directory value="$PROJECT_DIR$" />
-      <go_parameters value="-i" />
       <kind value="DIRECTORY" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
@@ -103,6 +106,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="[EDIT] accueil css" />
+    <MESSAGE value="[EDIT] dates main &amp; html" />
+    <option name="LAST_COMMIT_MESSAGE" value="[EDIT] dates main &amp; html" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/accueil.css">
     <title>Liste des artistes</title>
-    <link rel="stylesheet" type="text/css" href="front-end/css/shakur.css">
+    <link rel="stylesheet" type="text/css" href="/front-end/css/accueil.css">
 </head>
 <body>
 <h1>Liste des artistes</h1>
@@ -15,7 +15,7 @@
             <h2>{{.Name}}</h2>
             <p>Albums : {{.Albums}}</p>
             <p>Pistes : {{.Tracks}}</p>
-            <p><a href="{{.Self}}">Page de l'artiste</a></p>
+            <p><a href="/index/{id}">Page de l'artiste</a></p>
         </li>
     {{end}}
 </ul>

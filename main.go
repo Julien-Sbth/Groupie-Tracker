@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"html/template"
+	"io"
 	"log"
 	"net/http"
 )
@@ -37,13 +38,15 @@ func main() {
 	r.PathPrefix("/front-end/").Handler(fileHandler)
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
-func homeHandler(w http.ResponseWriter, r *http.Request) {
+func homeHandler(w http.ResponseWriter, _ *http.Request) {
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
 		fmt.Println("Erreur lors de la requête HTTP :", err)
 		return
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		_ = Body.Close()
+	}(resp.Body)
 	var artists []Artist
 	err = json.NewDecoder(resp.Body).Decode(&artists)
 	if err != nil {
@@ -59,7 +62,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	tmpl.Execute(w, artists)
+	_ = tmpl.Execute(w, artists)
 }
 func getArtistWithDates(id string) (*Artist, error) {
 	artistURL := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/artists/%s", id)
@@ -68,7 +71,9 @@ func getArtistWithDates(id string) (*Artist, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to get artist: %v", err)
 	}
-	defer artistResp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		_ = Body.Close()
+	}(artistResp.Body)
 	var artist Artist
 	err = json.NewDecoder(artistResp.Body).Decode(&artist)
 	if err != nil {
@@ -78,7 +83,9 @@ func getArtistWithDates(id string) (*Artist, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to get dates: %v", err)
 	}
-	defer datesResp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		_ = Body.Close()
+	}(datesResp.Body)
 	var dates interface{}
 	err = json.NewDecoder(datesResp.Body).Decode(&dates)
 	if err != nil {
@@ -105,7 +112,7 @@ func datesHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	tmpl.Execute(w, artist)
+	_ = tmpl.Execute(w, artist)
 }
 func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
@@ -125,5 +132,5 @@ func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	tmpl.Execute(w, artist)
+	_ = tmpl.Execute(w, artist)
 }

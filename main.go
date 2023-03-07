@@ -10,24 +10,23 @@ import (
 )
 
 type Artist struct {
-	ID             int         `json:"id"`
-	Name           string      `json:"name"`
-	Albums         string      `json:"albums"`
-	Tracks         string      `json:"tracks"`
-	Self           string      `json:"self"`
-	ImageURL       string      `json:"image"`
-	CreationDate   int64       `json:"creationDate"`
-	Members        []string    `json:"members"`
-	FirstAlbum     string      `json:"FirstAlbum"`
-	Locations      interface{} `json:"locations"`
-	DatesLocations interface{} `json:"dateslocations"`
-	ConcertDate    string      `json:"ConcertDate"`
-	Dates          interface{} `json:"dates"`
-	Latitude       float64     `json:"lat"`
-	Longitude      float64     `json:"long"`
-	Country        string      `json:"country"`
-	City           string      `json:"city"`
-	ConcertID      string      `json:"ConcertID"`
+	ID           int         `json:"id"`
+	Name         string      `json:"name"`
+	Albums       string      `json:"albums"`
+	Tracks       string      `json:"tracks"`
+	Self         string      `json:"self"`
+	ImageURL     string      `json:"image"`
+	CreationDate int64       `json:"creationDate"`
+	Members      []string    `json:"members"`
+	FirstAlbum   string      `json:"FirstAlbum"`
+	Locations    interface{} `json:"locations"`
+	ConcertDate  string      `json:"ConcertDate"`
+	Dates        interface{} `json:"dates"`
+	Relations    interface{} `json:"relations"`
+	Latitude     float64     `json:"lat"`
+	Longitude    float64     `json:"long"`
+	Country      string      `json:"country"`
+	City         string      `json:"city"`
 }
 
 func main() {
@@ -69,9 +68,10 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	tmpl.Execute(w, artists)
 }
-func getArtistWithDatesLocationsAndRelations(id string) (*Artist, error) {
+func getArtistWithDatesAndLocations(id string) (*Artist, error) {
 	artistURL := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/artists/%s", id)
-	datesLocationsURL := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/dates/%s", id)
+	datesURL := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/dates/%s", id)
+	locationsURL := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/locations/%s", id)
 	relationsURL := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/relations/%s", id)
 
 	artistResp, err := http.Get(artistURL)
@@ -86,45 +86,47 @@ func getArtistWithDatesLocationsAndRelations(id string) (*Artist, error) {
 		return nil, fmt.Errorf("failed to decode artist response: %v", err)
 	}
 
-	datesLocationsResp, err := http.Get(datesLocationsURL)
+	datesResp, err := http.Get(datesURL)
 	if err != nil {
-		return nil, fmt.Errorf("failed to get dates and locations: %v", err)
+		return nil, fmt.Errorf("failed to get dates: %v", err)
 	}
-	defer datesLocationsResp.Body.Close()
+	defer datesResp.Body.Close()
 
-	var datesLocations []DateLocation
-	err = json.NewDecoder(datesLocationsResp.Body).Decode(&datesLocations)
+	var dates interface{}
+	err = json.NewDecoder(datesResp.Body).Decode(&dates)
 	if err != nil {
-		return nil, fmt.Errorf("failed to decode dates and locations response: %v", err)
+		return nil, fmt.Errorf("failed to decode dates response: %v", err)
 	}
 
-	relationsResp, err := http.Get(relationsURL)
+	locationsResp, err := http.Get(locationsURL)
 	if err != nil {
-		return nil, fmt.Errorf("failed to get relations: %v", err)
+		return nil, fmt.Errorf("failed to get locations: %v", err)
 	}
-	defer relationsResp.Body.Close()
+	defer locationsResp.Body.Close()
+
+	var locations interface{}
+	err = json.NewDecoder(locationsResp.Body).Decode(&locations)
+	if err != nil {
+		return nil, fmt.Errorf("failed to decode locations response: %v", err)
+	}
+
+	relationResp, err := http.Get(relationsURL)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get dates: %v", err)
+	}
+	defer relationResp.Body.Close()
 
 	var relations interface{}
-	err = json.NewDecoder(relationsResp.Body).Decode(&relations)
+	err = json.NewDecoder(relationResp.Body).Decode(&relations)
 	if err != nil {
-		return nil, fmt.Errorf("failed to decode relations response: %v", err)
+		return nil, fmt.Errorf("failed to decode dates response: %v", err)
 	}
-
-	for i := range relations {
-		for j := range datesLocations {
-			if relations[i].ConcertID == datesLocations[j].Location.ID {
-				relations[i].Date = datesLocations[j].Date
-				relations[i].Location = datesLocations[j].Location
-			}
-		}
-	}
-
-	artist.DatesLocations = relations
-	artist.Dates = datesLocations
+	artist.Dates = dates
+	artist.Locations = locations
+	artist.Relations = relations
 
 	return &artist, nil
 }
-
 func getLocations(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, ok := vars["id"]
@@ -133,7 +135,7 @@ func getLocations(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, err := getArtistWithDatesLocationsAndRelations(id)
+	_, err := getArtistWithDatesAndLocations(id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -150,7 +152,7 @@ func datesHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, err := getArtistWithDatesLocationsAndRelations(id)
+	_, err := getArtistWithDatesAndLocations(id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -167,7 +169,7 @@ func GetRelation(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, err := getArtistWithDatesLocationsAndRelations(id)
+	_, err := getArtistWithDatesAndLocations(id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -184,7 +186,7 @@ func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	artist, err := getArtistWithDatesLocationsAndRelations(id)
+	artist, err := getArtistWithDatesAndLocations(id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

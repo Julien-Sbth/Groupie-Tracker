@@ -22,6 +22,11 @@
 </div>
 <div id="container">
     <section id="section1">
+        <ul>
+            {{range .DatesLocations}}
+                <li>{{.}}</li>
+            {{end}}
+        </ul>
     </section>
     <section id="section2">
         <img src="{{.ImageURL}}">
@@ -37,6 +42,12 @@
                 <li>{{.}}</li>
             {{end}}
         </ul>
+        <ul>
+            {{range .Locations}}
+                <li>{{.}}</li>
+            {{end}}
+        </ul>
+
     </section>
 </div>
 </body>

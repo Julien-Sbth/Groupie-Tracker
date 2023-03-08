@@ -7,10 +7,9 @@
 <body>
 <h1>Liste des artistes</h1>
 <ul>
-    <form action="/" method="GET">
-        <label for="artiste">Nom de l'artiste :</label>
-        <input type="text" id="artiste" name="artiste">
-        <button type="submit">Rechercher</button>
+    <form action="/search" method="get">
+        <input type="text" placeholder="Search" name="search">
+        <button type="submit">Search</button>
     </form>
     <div id="resultat">
         <!-- Le résultat de la recherche sera affiché ici -->

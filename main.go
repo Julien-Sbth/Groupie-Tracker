@@ -21,8 +21,8 @@ type Artist struct {
 	CreationDate int64       `json:"creationDate"`
 	Members      []string    `json:"members"`
 	FirstAlbum   string      `json:"firstAlbum"`
-	Locations    interface{} `json:"locations"`
 	ConcertDate  string      `json:"concertDate"`
+	Locations    interface{} `json:"locations"`
 	Dates        interface{} `json:"dates"`
 	Relations    interface{} `json:"relations"`
 }
@@ -64,6 +64,7 @@ func main() {
 	fs = http.FileServer(http.Dir("front-end"))
 	fileHandler := http.StripPrefix("/front-end/", fs)
 	r.PathPrefix("/front-end/").Handler(fileHandler)
+	fmt.Println("Server started on localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
 
@@ -144,7 +145,7 @@ func getArtistWithDatesAndLocations(id string) (*Artist, error) {
 	artistURL := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/artists/%s", id)
 	datesURL := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/dates/%s", id)
 	locationsURL := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/locations/%s", id)
-	relationsURL := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/relations/%s", id)
+	relationsURL := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/relation/%s", id)
 
 	artistResp, err := http.Get(artistURL)
 	if err != nil {

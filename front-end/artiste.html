@@ -1,9 +1,33 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <meta charset="UTF-8">
     <title>{{.Name}}</title>
     <style>
+        #menu ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        #menu li {
+            float: left;
+        }
+
+        #menu li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        #menu li a:hover {
+            background-color: #111;
+        }
         /* Styles pour la div principale */
         #main {
             border-radius: 5px;
@@ -76,6 +100,11 @@
     </style>
 </head>
 <body>
+<input type="checkbox" id="check">
+<label for="check">
+    <i class="fas fa-bars" id="btn"></i>
+    <i class="fas fa-times" id="cancel"></i>
+</label>
 <div id="main">
     <h1>{{.Name}}</h1>
     <img src="{{.ImageURL}}" alt="Photo de {{.Name}}">
@@ -98,19 +127,25 @@
     <h3>Dates</h3>
     <p>Voici les dates de concerts:</p>
     <ul>
-        {{range .Locations}}
+        {{range .Dates}}
             <li>{{.}}</li>
         {{end}}
     </ul>
-    <p>Voici les lieux des concerts passés:</p>
+    <p>La locations</p>
+    <h3>Location</h3>
     <ul>
-        <li>Compton, Californie</li>
-        <li>Los Angeles, Californie</li>
-        <li>Détroit, Michigan</li>
-        <li>New York, New York</li>
-        <li>San Francisco, Californie</li>
+        {{range .Locations}}
+        <li>{{.}}</li>
+        {{end}}
     </ul>
+    <p>La Relations</p>
     <h3>Relation</h3>
+    <ul>
+        {{range .Relations}}
+            <li>{{.}}</li>
+        {{end}}
+    </ul>
+
     <a href="/lofi/{{.ID}}">
     <button type="submit">
         Lofi

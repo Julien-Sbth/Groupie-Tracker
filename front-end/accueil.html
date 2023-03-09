@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <title>Liste des artistes</title>
     <link rel="stylesheet" type="text/css" href="/front-end/css/accueil.css">
@@ -8,18 +8,24 @@
 <h1>Liste des artistes</h1>
 <ul>
     <form action="/search" method="get">
-        <input type="text" placeholder="Search" name="search">
+        <label>
+            <label for="search">Recherche :</label>
+            <input type="text" placeholder="Search" id="search"  list="suggestions">
+            <datalist id="suggestions">
+                {{range .}}
+                <option value="{{if gt (len .Members) 2}} {{.Name}} - groupe {{else}} {{.Name}} - membre {{end}}">
+                    {{end}}
+            </datalist>
+
+
+        </label>
         <button type="submit">Search</button>
     </form>
-    <div id="resultat">
-        <!-- Le résultat de la recherche sera affiché ici -->
-    </div>
     {{range .}}
         <li id="artist{{.ID}}">
             <div class="artiste-box">
                 <img src="{{.ImageURL}}" alt="{{.Name}}" />
                 <div class="info">
-                    <h2>{{.Name}}</h2>
                     <p>Albums : {{.Albums}}</p>
                     <p>Pistes : {{.Tracks}}</p>
                     <p><a href="/index/{{.ID}}">Page de {{.Name}}</a></p>
@@ -27,6 +33,30 @@
             </div>
         </li>
     {{end}}
+
 </ul>
+<script>
+    var input = document.getElementById('search');
+    input.addEventListener('input', function() {
+        var value = input.value;
+        var datalist = document.getElementById('suggestions');
+        var options = datalist.options;
+        var matches = [];
+        for (var i = 0; i < options.length; i++) {
+            var option = options[i];
+            if (option.value.indexOf(value) === 0) {
+                matches.push(option.value);
+            }
+        }
+        datalist.innerHTML = '';
+        matches.forEach(function(match) {
+            var option = document.createElement('option');
+            option.value = match;
+            datalist.appendChild(option);
+        });
+    });
+
+
+</script>
 </body>
 </html>

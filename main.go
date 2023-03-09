@@ -12,19 +12,21 @@ import (
 )
 
 type Artist struct {
-	ID           int         `json:"id"`
-	Name         string      `json:"name"`
-	Albums       string      `json:"albums"`
-	Tracks       string      `json:"tracks"`
-	Self         string      `json:"self"`
-	ImageURL     string      `json:"image"`
-	CreationDate int64       `json:"creationDate"`
-	Members      []string    `json:"members"`
-	FirstAlbum   string      `json:"firstAlbum"`
-	ConcertDate  string      `json:"concertDate"`
-	Locations    interface{} `json:"locations"`
-	Dates        interface{} `json:"dates"`
-	Relations    interface{} `json:"relations"`
+	ID             int         `json:"id"`
+	Name           string      `json:"name"`
+	Albums         string      `json:"albums"`
+	Tracks         string      `json:"tracks"`
+	Self           string      `json:"self"`
+	ImageURL       string      `json:"image"`
+	CreationDate   int64       `json:"creationDate"`
+	Members        []string    `json:"members"`
+	FirstAlbum     string      `json:"firstAlbum"`
+	ConcertDate    string      `json:"concertDate"`
+	Locations      interface{} `json:"locations"`
+	Dates          interface{} `json:"dates"`
+	Relations      interface{} `json:"relations"`
+	FirstAlbumDate string
+	Location       string
 }
 
 type SearchResult struct {
@@ -70,6 +72,10 @@ func main() {
 
 func searchHandler(w http.ResponseWriter, r *http.Request) {
 	searchTerm := r.FormValue("search")
+	var artists []Artist
+	suggestions := autoCompleteSuggestions(artists, searchTerm)
+	fmt.Println(suggestions) // Juste pour vérifier les suggestions dans la console
+
 	// Retrieve artists from API
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
@@ -78,43 +84,68 @@ func searchHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer resp.Body.Close()
 
-	var artists []Artist
 	err = json.NewDecoder(resp.Body).Decode(&artists)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	// Retrieve search query from URL
-	searchQuery := r.URL.Query().Get("q")
-
-	// Filter artists by search query
-	var result Artist
+	// Filter artists by search term
+	var results []Artist
 	for _, artist := range artists {
-		if strings.ToLower(artist.Name) == strings.ToLower(searchTerm) {
-			result = artist
-			break // exit the loop after finding the matching artist
+		if strings.Contains(strings.ToLower(artist.Name), strings.ToLower(searchTerm)) {
+			results = append(results, artist)
 		}
 	}
 
-	// If no artist matches the search query, display an error message
-	if result.ID == 0 {
+	// If no artist matches the search term, display an error message
+	if len(results) == 0 {
 		fmt.Fprintf(w, "<head><style> body { font-family: 'Lato', sans-serif; text-align: center; background-color: #f2f2f2; } h1 { color: #3c3c3c; font-size: 3em; margin-bottom: 20px; } p { color: #3c3c3c; font-size: 2em; margin-top: 30px; margin-bottom: 10px; } </style></head>")
-		fmt.Fprintf(w, "<h1>Search results for '%s'</h1>", searchQuery)
+		fmt.Fprintf(w, "<h1>Search results for '%s'</h1>", searchTerm)
 		fmt.Fprint(w, "<p>No artist found.</p>")
 		return
 	}
 
-	// Display search result in HTML
-	fmt.Fprintf(w, "<head><style> body { font-family: 'Lato', sans-serif; text-align: center; background-color: #f2f2f2; } h1 { color: #3c3c3c; font-size: 3em; margin-bottom: 20px; } h2 { color: #3c3c3c; font-size: 2em; margin-top: 30px; margin-bottom: 10px; } ul { margin: 0; padding: 0; list-style: none; text-align: center; } ul li { font-size: 1.5em; margin-bottom: 10px; display: inline-block; } img { border-radius: 25px }</style></head>")
-	fmt.Fprintf(w, "<h1>%s</h1>", result.Name)
+	// Display search results in HTML
+	fmt.Fprintf(w, "<head><style> body { font-family: 'Lato', sans-serif; text-align: center; background-color: #f2f2f2; } h1 { color: #3c3c3c; font-size: 3em; margin-bottom: 20px; } ul { margin: 0; padding: 0; list-style: none; text-align: center; } ul li { font-size: 1.5em; margin-bottom: 10px; display: inline-block; } img { border-radius: 25px }</style></head>")
+	fmt.Fprintf(w, "<h1>Search results for '%s'</h1>", searchTerm)
 	fmt.Fprint(w, "<ul>\n")
-	fmt.Fprintf(w, "<li>First album date: %s</li>\n", result.FirstAlbum)
-	fmt.Fprintf(w, "<li>Creation date: %s</li>\n", strconv.Itoa(int(result.CreationDate)))
-	fmt.Fprintf(w, "<li>Members: %s</li>\n", strings.Join(result.Members, ", "))
-	fmt.Fprintf(w, "<li><img src=\"%s\"></li>\n", result.ImageURL)
-	fmt.Fprintf(w, "<li><a href=\"/index/%d\">More information about %s</a></li>\n", result.ID, result.Name)
-	fmt.Fprint(w, "</ul>\n")
+	for _, artist := range results {
+		fmt.Fprintf(w, "<li id=\"artist%d\">\n", artist.ID)
+		fmt.Fprintf(w, "<div class=\"artiste-box\">\n")
+		fmt.Fprintf(w, "<img src=\"%s\" alt=\"%s\" />\n", artist.ImageURL, artist.Name)
+		fmt.Fprintf(w, "<div class=\"info\">\n")
+		fmt.Fprintf(w, "<h2>%s Membre</h2>\n", artist.Name)
+		fmt.Fprintf(w, "<p>Albums : %s</p>\n", artist.Albums)
+		fmt.Fprintf(w, "<p>Pistes : %s</p>\n", artist.Tracks)
+		fmt.Fprintf(w, "<p><a href=\"/index/%d\">Page de %s</a></p>\n", artist.ID, artist.Name)
+		fmt.Fprintf(w, "</div>\n") // end div.info
+		fmt.Fprintf(w, "</div>\n") // end div.artiste-box
+		fmt.Fprintf(w, "</li>\n")
+	}
+}
+func autoCompleteSuggestions(artists []Artist, search string) []string {
+	var suggestions []string
+	for _, artist := range artists {
+		if strings.HasPrefix(strings.ToLower(artist.Name), strings.ToLower(search)) {
+			suggestions = append(suggestions, artist.Name+" - artist/band")
+		}
+		for _, member := range artist.Members {
+			if strings.HasPrefix(strings.ToLower(member), strings.ToLower(search)) {
+				suggestions = append(suggestions, "Membre - "+member)
+			}
+		}
+		if strings.HasPrefix(strings.ToLower(artist.Location), strings.ToLower(search)) {
+			suggestions = append(suggestions, artist.Location+" - location")
+		}
+		if strings.HasPrefix(strings.ToLower(artist.FirstAlbumDate), strings.ToLower(search)) {
+			suggestions = append(suggestions, artist.FirstAlbumDate+" - first album date")
+			if strings.HasPrefix(strings.ToLower(strconv.FormatInt(artist.CreationDate, 10)), strings.ToLower(search)) {
+				suggestions = append(suggestions, strconv.FormatInt(artist.CreationDate, 10)+" - creation date")
+			}
+		}
+	}
+	return suggestions
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {

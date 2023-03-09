@@ -1,0 +1,10 @@
+body {
+    background-size: 130% ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#groupName {
+    display: none;
+}

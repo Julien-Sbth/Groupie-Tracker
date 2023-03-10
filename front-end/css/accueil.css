@@ -69,7 +69,6 @@ form {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
 }
 
 input[type="text"] {
@@ -96,3 +95,12 @@ h1{
     justify-content: center;
     align-items: center;
 }
+#ma-zone-texte {
+    display: none; /* masquer la zone de texte par défaut */
+}
+
+#mon-bouton:focus + #ma-zone-texte {
+    display: block; /* afficher la zone de texte lorsqu'on clique sur le bouton */
+}
+
+

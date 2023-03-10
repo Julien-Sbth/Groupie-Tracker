@@ -10,14 +10,15 @@
     <form action="/search" method="get">
         <label>
             <label for="search">Recherche :</label>
-            <input type="text" placeholder="Search" id="search"  list="suggestions">
+            <input type="text"  required placeholder="Search" name="search" id="search" list="suggestions" onkeyup="myFunction()">
             <datalist id="suggestions">
                 {{range .}}
-                <option value="{{if gt (len .Members) 2}} {{.Name}} - groupe {{else}} {{.Name}} - membre {{end}}">
+                <ul id="myUL">
+                    <li><a href="#"></a></li>
+                </ul>
+                <option value="{{.Name}}">
                     {{end}}
             </datalist>
-
-
         </label>
         <button type="submit">Search</button>
     </form>
@@ -36,27 +37,22 @@
 
 </ul>
 <script>
-    var input = document.getElementById('search');
-    input.addEventListener('input', function() {
-        var value = input.value;
-        var datalist = document.getElementById('suggestions');
-        var options = datalist.options;
-        var matches = [];
-        for (var i = 0; i < options.length; i++) {
-            var option = options[i];
-            if (option.value.indexOf(value) === 0) {
-                matches.push(option.value);
+    function myFunction() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
             }
         }
-        datalist.innerHTML = '';
-        matches.forEach(function(match) {
-            var option = document.createElement('option');
-            option.value = match;
-            datalist.appendChild(option);
-        });
-    });
-
-
+    }
 </script>
 </body>
 </html>

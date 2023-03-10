@@ -1,55 +1,143 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Relation</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-</head>
-<body onload="initMap()">
-<header> <h1> Dates and locations of concerts </h1> </header>
-<div id="map"></div>
-<div class="dateLoc">
-    <div>Locations :</div>
-    <div>Dates :</div>
+<title>{{.Name}}</title>
+<style>
+    #menu ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }#menu li {
+         float: left;
+     }
+    #menu li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }#menu li a:hover {
+         background-color: #111;
+     }
+    /* Styles pour la div principale */
+    #main {
+        border-radius: 5px;
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        box-shadow: 5px 5px 15px #ddd;
+    }
+    /* Styles pour le titre */
+    h1 {
+        font-size: 48px;
+        text-align: center;
+        margin-top: 0;
+        color: #222;
+        text-shadow: 2px 2px 3px #ddd;
+    }
+    /* Styles pour le sous-titre */
+    h2 {
+        font-size: 36px;
+        color: #0080ff;
+        text-align: center;
+        margin-top: 50px;
+    }
+    /* Styles pour le texte principal */
+    p {
+        font-size: 24px;
+        line-height: 1.5;
+        margin: 20px 0;
+    }
+    /* Styles pour les liens */
+    a {
+        text-decoration: none;
+        color: #0080ff;
+        font-weight: bold;
+    }
+    /* Styles pour la liste */
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 50px 0;
+    }
+    /* Styles pour les éléments de la liste */
+    li {
+        margin: 30px 0;
+        padding: 30px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 5px 5px 15px #ddd;
+    }
+    /* Styles pour les titres de section */
+    h3 {
+        font-size: 24px;
+        color: black;
+        margin: 20px 0;
+    }
+    /* Styles pour les images */
+    img {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        height: auto;
+        box-shadow: 5px 5px 15px #ddd;
+    }
+    img{
+        border-radius: 25px;
+    }
+</style>
+<body>
+<input type="checkbox" id="check">
+<label for="check">
+    <i class="fas fa-bars" id="btn"></i>
+    <i class="fas fa-times" id="cancel"></i>
+</label>
+<div id="main">
+    <h1>{{.Name}}</h1>
+    <img src="{{.ImageURL}}" alt="Photo de {{.Name}}">
+    <h2>Membres du groupe</h2>
+    <p>Voici les membres du groupe {{.Name}} :</p>
+    <ul>
+        {{range .Members}}
+        <li>{{.}}</li>
+        {{end}}
+    </ul>
+    <h2>Tournées</h2>
+    <h3>Artistes</h3>
+    <ul>
+        <li>{{.Name}}</li>
+    </ul>
+    <h3>Premier Albums</h3>
+    <ul>
+        <li>{{.FirstAlbum}}</li>
+    </ul>
+    <h3>Dates</h3>
+    <p>Voici les dates de concerts:</p>
+    <ul>
+        {{range .Dates}}
+        <li>{{.}}</li>
+        {{end}}
+    </ul>
+    <p>La locations</p>
+    <h3>Location</h3>
+    <ul>
+        {{range .Locations}}
+        <li>{{.}}</li>
+        {{end}}
+    </ul>
+    <p>La Relations</p>
+    <h3>Relation</h3>
+    <ul>
+        {{range .Relations}}
+        <li>{{.}}</li>
+        {{end}}
+    </ul>
+
+    <a href="/lofi/{{.ID}}">
+        <button type="submit">
+            Lofi
+        </button>
+    </a>
 </div>
-{{ range  $locations, $values := .Relations}}
-    {{range $key, $value := $values}}
-        <div class="dateLoc"> <a href="#" onclick="showLocationOnMap('{{$locations}}')">{{$locations}} :</a>
-            {{$value}}
-        </div>
-    {{end}}
-{{end}}
-<script>
-    function initMap() {
-        const map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: 40.77975, lng: -73.983 },
-            zoom: 30,
-            mapTypeId: "satellite",
-        });
-
-        map.setTilt(45);
-    }
-
-    function showLocationOnMap(location) {
-        const geocoder = new google.maps.Geocoder();
-        geocoder.geocode({ address: location }, function (results, status) {
-            if (status === "OK") {
-                const map = new google.maps.Map(document.getElementById("map"), {
-                    center: results[0].geometry.location,
-                    zoom: 15,
-                });
-
-                new google.maps.Marker({
-                    position: results[0].geometry.location,
-                    map: map,
-                });
-            } else {
-                alert("Geocode was not successful for the following reason: " + status);
-            }
-        });
-    }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
-        async defer></script>
-</body>
-</html>

@@ -1,4 +1,3 @@
-/* Styles pour le titre */
 h1 {
     font-size: 48px;
     text-align: center;
@@ -6,46 +5,39 @@ h1 {
     color: #222;
     text-shadow: 2px 2px 3px #ddd;
 }
-/* Styles pour le sous-titre */
 h2 {
     font-size: 36px;
     color: #0080ff;
     text-align: center;
     margin-top: 50px;
 }
-/* Styles pour le texte principal */
 p {
     font-size: 24px;
     line-height: 1.5;
     margin: 20px 0;
 }
-/* Styles pour les liens */
 a {
     text-decoration: none;
     color: #0080ff;
     font-weight: bold;
 }
-/* Styles pour la liste */
 ul {
     list-style: none;
     padding: 0;
     margin: 50px 0;
     text-align: center;
 }
-/* Styles pour les éléments de la liste */
 li {
     width: 25%;
     float: left;
     padding: 25px;
     box-sizing: border-box;
 }
-/* Styles pour les titres de section */
 h3 {
     font-size: 24px;
     color: black;
     margin: 20px 0;
 }
-/* Styles pour les images */
 img {
     display: block;
     margin: 0 auto;
@@ -54,7 +46,6 @@ img {
     box-shadow: 5px 5px 15px #ddd;
     border-radius: 50px;
 }
-/* Styles pour la classe "info-container" */
 .info-container {
     display: flex;
     justify-content: center;
@@ -63,7 +54,6 @@ img {
     padding: 20px;
     box-shadow: 0px 0px 15px 5px rgba(255, 255, 255, 0.5);
 }
-/* Styles pour la classe "info" */
 .artiste-box {
     background-color: #f8f5f5;
     border-radius: 10px;
@@ -79,7 +69,6 @@ form {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
 }
 
 input[type="text"] {
@@ -106,3 +95,12 @@ h1{
     justify-content: center;
     align-items: center;
 }
+#ma-zone-texte {
+    display: none; /* masquer la zone de texte par défaut */
+}
+
+#mon-bouton:focus + #ma-zone-texte {
+    display: block; /* afficher la zone de texte lorsqu'on clique sur le bouton */
+}
+
+

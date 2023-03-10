@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <title>Liste des artistes</title>
     <link rel="stylesheet" type="text/css" href="/front-end/css/accueil.css">
@@ -8,25 +8,99 @@
 <h1>Liste des artistes</h1>
 <ul>
     <form action="/search" method="get">
-        <input type="text" placeholder="Search" name="search">
+        <label>
+            <label>
+                <input type="text" required placeholder="Search" name="search" list="suggestions" id="search" onkeyup="myFunction()">
+            </label>
+
+            <datalist id="suggestions">
+                {{range .}}
+                <option value="{{if gt (len .Members) 2}} {{.Name}} - groupe {{else}} {{.Name}} - artiste {{end}}">
+
+                {{end}}
+            </datalist>
+        </label>
         <button type="submit">Search</button>
     </form>
-    <div id="resultat">
-        <!-- Le résultat de la recherche sera affiché ici -->
-    </div>
-    {{range .}}
-        <li id="artist{{.ID}}">
-            <div class="artiste-box">
-                <img src="{{.ImageURL}}" alt="{{.Name}}" />
-                <div class="info">
-                    <h2>{{.Name}}</h2>
-                    <p>Albums : {{.Albums}}</p>
-                    <p>Pistes : {{.Tracks}}</p>
-                    <p><a href="/index/{{.ID}}">Page de {{.Name}}</a></p>
-                </div>
+    <form>
+        Nombres de personnes
+        <label><input type="checkbox" name="option1" value="1" onclick="uncheckOthers(this)">1</label>
+        <label><input type="checkbox" name="option1" value="1" onclick="uncheckOthers(this)">2</label>
+        <label><input type="checkbox" name="option1" value="1" onclick="uncheckOthers(this)">3</label>
+        <label><input type="checkbox" name="option1" value="1" onclick="uncheckOthers(this)">4</label>
+        <label><input type="checkbox" name="option1" value="1" onclick="uncheckOthers(this)">5</label>
+        <label><input type="checkbox" name="option1" value="1" onclick="uncheckOthers(this)">6</label>
+        <label><input type="checkbox" name="option1" value="1" onclick="uncheckOthers(this)">7</label>
+    </form>
+    <button class="bouton" id="mon-bouton">Voir plus de filtre</button>
+        <form>
+            <div class="zone-texte" id="ma-zone-texte">
+            <label for="year">Sélectionner une année :</label>
+            <input type="range" id="year" name="year" min="1950" max="2023" oninput="updateYearValue()">
+            <span id="yearValue">1800</span>
             </div>
-        </li>
-    {{end}}
+        </form>
+    {{range .}}
+    <li id="artist{{.ID}}">
+        <div class="artiste-box">
+            <img src="{{.ImageURL}}" alt="{{.Name}}" />
+            <div class="info">
+                <p>Albums : {{.Albums}}</p>
+                <p>Pistes : {{.Tracks}}</p>
+                <p><a href="/index/{{.ID}}">Page de {{.Name}}</a></p>
+                <label>
+                    <p name="artist" id="artist">
+                        {{if gt (len .Members) 2}}
+                        <option value="{{.Name}} - groupe">{{.Name}} - groupe</option>
+                        {{else}}
+                        <option value="{{.Name}} - membre">{{.Name}} - membre</option>
+                        {{end}}
+                    </p>
+                </label>
+            </div>
+        </div>
+    </li> {{end}}
 </ul>
+    <script src="front-end/js/accueil.js"></script>
+<script>
+    function updateYearValue() {
+        document.getElementById("yearValue").innerHTML = document.getElementById("year").value;
+    }
+
+    function uncheckOthers(currentCheckbox) {
+        let checkboxes = document.getElementsByName(currentCheckbox.name);
+
+        for (let i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] !== currentCheckbox && checkboxes[i].checked) {
+                checkboxes[i].checked = false;
+            }
+        }
+    }
+
+    const bouton = document.getElementById('mon-bouton');
+    const zoneTexte = document.getElementById('ma-zone-texte');
+
+    zoneTexte.style.display = 'none';
+
+    let isHidden = true;
+
+    bouton.addEventListener('click', function() {
+        if (isHidden) {
+            zoneTexte.style.display = 'block';
+            isHidden = false;
+            bouton.style.display = 'none';
+        } else {
+            zoneTexte.style.display = 'none';
+            isHidden = true;
+        }
+    });
+
+    const input = document.getElementById('year');
+    input.addEventListener('click', function() {
+        if (isHidden) {
+            bouton.style.display = 'block';
+        }
+    });
+</script>
 </body>
 </html>

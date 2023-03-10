@@ -2,5 +2,6 @@ module API
 
 require github.com/gorilla/mux v1.8.0
 
-go 1.19
+replace API/API => ./API
 
+go 1.19

@@ -9,8 +9,9 @@
 <ul>
     <form action="/search" method="get">
         <label>
-            <label for="search">Recherche :</label>
-            <input type="text"  required placeholder="Search" name="search" id="search" list="suggestions" onkeyup="myFunction()">
+            <label>
+                <input type="text"  required placeholder="Search" name="search" id="search" list="suggestions" onkeyup="myFunction()">
+            </label>
             <datalist id="suggestions">
                 {{range .}}
                 <ul id="myUL">
@@ -21,6 +22,25 @@
             </datalist>
         </label>
         <button type="submit">Search</button>
+        <label><input type="checkbox" name="option1" value="1">1</label>
+        <br>
+        <label><input type="checkbox" name="option2" value="2">2</label>
+        <br>
+        <label><input type="checkbox" name="option3" value="3">3</label>
+        <br>
+        <label><input type="checkbox" name="option4" value="4">4</label>
+        <br>
+        <label><input type="checkbox" name="option5" value="5">5</label>
+        <br>
+        <label><input type="checkbox" name="option6" value="6">6</label>
+        <br>
+        <label><input type="checkbox" name="option7" value="7">7</label>
+        <br>
+        <label for="year">Sélectionner une année :</label>
+        <br>
+        <input type="range" id="year" name="year" min="1950" max="2023" oninput="updateYearValue()">
+        <br>
+        <span id="yearValue">1800</span>
     </form>
     {{range .}}
         <li id="artist{{.ID}}">
@@ -34,25 +54,14 @@
             </div>
         </li>
     {{end}}
-
 </ul>
+<script src="js/accueil.js"></script>
 <script>
-    function myFunction() {
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("myUL");
-        li = ul.getElementsByTagName("li");
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName("a")[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "";
-            } else {
-                li[i].style.display = "none";
-            }
-        }
+    function updateYearValue() {
+        let year = document.getElementById("year").value;
+        document.getElementById("yearValue").innerHTML = year;
     }
+
 </script>
 </body>
 </html>

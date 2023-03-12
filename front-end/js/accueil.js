@@ -14,3 +14,42 @@ function myFunction() {
         }
     }
 }
+
+function updateYearValue() {
+    document.getElementById("yearValue").innerHTML = document.getElementById("year").value;
+}
+
+function uncheckOthers(currentCheckbox) {
+    let checkboxes = document.getElementsByName(currentCheckbox.name);
+
+    for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i] !== currentCheckbox && checkboxes[i].checked) {
+            checkboxes[i].checked = false;
+        }
+    }
+}
+
+const bouton = document.getElementById('mon-bouton');
+const zoneTexte = document.getElementById('ma-zone-texte');
+
+zoneTexte.style.display = 'none';
+
+let isHidden = true;
+
+bouton.addEventListener('click', function() {
+    if (isHidden) {
+        zoneTexte.style.display = 'block';
+        isHidden = false;
+        bouton.style.display = 'none';
+    } else {
+        zoneTexte.style.display = 'none';
+        isHidden = true;
+    }
+});
+
+const input = document.getElementById('year');
+input.addEventListener('click', function() {
+    if (isHidden) {
+        bouton.style.display = 'block';
+    }
+});

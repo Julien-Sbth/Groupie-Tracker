@@ -10,10 +10,11 @@ import (
 
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/", API.HomeHandler).Methods("GET")
+	r.HandleFunc("/home", API.AccueilHandler).Methods("GET")
 	r.HandleFunc("/index/{id}", API.ArtistDetailsHandler).Methods("GET")
 	r.HandleFunc("/lofi/{id}", API.Lofi).Methods("GET")
 	r.HandleFunc("/search", API.SearchHandler).Methods("GET")
+	r.HandleFunc("/", API.HomeHandler).Methods("GET")
 
 	fs := http.FileServer(http.Dir("front-end/css"))
 	cssHandler := http.StripPrefix("/css/", fs)

@@ -27,12 +27,3 @@ type SearchResult struct {
 	Locations    interface{} `json:"locations"`
 	Image        string      `json:"image"`
 }
-type Band struct {
-	Name           string
-	Members        []string
-	Location       string
-	FirstAlbumDate string
-	Page           string
-	Locations      string
-	FirstAlbum     string
-}

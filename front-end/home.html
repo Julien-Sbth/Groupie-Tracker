@@ -115,8 +115,8 @@
 {{range $i, $artist := .}}
 {{ if lt $i 8 }}
 <li id="artist{{$artist.ID}}">
+    <a href="/index/{{.ID}}" id="artist{{.ID}}">Page de {{.Name}}
         <div class="artiste-box">
-            <a href="/index/{{.ID}}" id="artist{{.ID}}">
             <img src="{{.ImageURL}}" alt="{{.Name}}" />
             <div class="info">
                 <p>Albums : {{.Albums}}</p>
@@ -125,9 +125,9 @@
                 <label>
                     <p name="artist" id="artist">
                         {{if gt (len .Members) 2}}
-                        <option value="{{.Name}} - groupe">{{.Name}} groupe</option>
+                        <option value="{{.Name}} - groupe">{{.Name}} - groupe</option>
                         {{else}}
-                        <option value="{{.Name}} - membre">{{.Name}} artiste</option>
+                        <option value="{{.Name}} - membre">{{.Name}} - artiste</option>
                         {{end}}
                     </p>
                 </label>

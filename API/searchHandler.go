@@ -10,8 +10,6 @@ import (
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
 	searchTerm := r.FormValue("search")
 	var artists []Artist
-	suggestions := AutoCompleteSuggestions(artists, searchTerm)
-	fmt.Println(suggestions) // Juste pour vérifier les suggestions dans la console
 
 	// Retrieve artists from API
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")

@@ -1,139 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <title>The Artist API</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            align-items: center;
-        }
-        header > div:last-child {
-            margin-left: auto;
-        }
-
-
-        h1 {
-            text-align: center;
-            margin-top: 50px;
-        }
-        a {
-            color: #fff;
-            text-decoration: none;
-        }
-        h1 {
-            font-size: 48px;
-            text-align: center;
-            margin-top: 0;
-            color: #222;
-            text-shadow: 2px 2px 3px #ddd;
-        }
-        h2 {
-            font-size: 36px;
-            color: #0080ff;
-            text-align: center;
-            margin-top: 50px;
-        }
-        p {
-            font-size: 24px;
-            line-height: 1.5;
-            margin: 20px 0;
-        }
-        a {
-            text-decoration: none;
-            color: #0080ff;
-            font-weight: bold;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 50px 0;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        li {
-            list-style: none;
-            width: 25%;
-            float: left;
-            padding: 25px;
-            box-sizing: border-box;
-        }
-        h3 {
-            font-size: 24px;
-            color: black;
-            margin: 20px 0;
-        }
-        img {
-            display: block;
-            margin: 0 auto;
-            max-width: 100%;
-            height: auto;
-            box-shadow: 5px 5px 15px #ddd;
-            border-radius: 50px;
-        }
-        .artiste-box {
-            background-color: #f8f5f5;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        h1{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .info{
-            font-size: 24px;
-            color: black;
-            margin: 20px 0;
-            text-align: center;
-        }
-        .artiste-box:hover {
-            background-color: orange;
-        }
-    </style>
-</head>
+    <link rel="stylesheet" type="text/css" href="/front-end/css/home.css">
 <body>
-<header>
-    <a href="/home">Accueil</a>
-</header>
-<h1>The Artist API</h1>
+<h1 tabindex="0">The Artist API</h1>
+<center>
+    <button class="button" id="mon-bouton">boutton</button>
+</center>
+<center>
+    <div class="zone-texte" id="ma-zone-texte">
+    <a href="/home">
+    <button type="button" class="accueil">
+    Voir plus d'artistes...
+    </button>
+    </a>
+
+    <button onclick="location.reload()" class="refresh-button">Rafraichir les artistes</button>
+    </div>
+</center>
+
 {{range $i, $artist := .}}
 {{ if lt $i 8 }}
 <li id="artist{{$artist.ID}}">
-    <a href="/index/{{.ID}}" id="artist{{.ID}}">Page de {{.Name}}
+    <a href="/index/{{.ID}}" id="artist{{.ID}}">
         <div class="artiste-box">
             <img src="{{.ImageURL}}" alt="{{.Name}}" />
             <div class="info">
-                <p>Albums : {{.Albums}}</p>
-                <p>Pistes : {{.Tracks}}</p>
-                <p></p>
+                <p>Premier Albums : {{.FirstAlbum}}</p>
+                <p>Creation groupe : {{.CreationDate}}</p>
+
                 <label>
                     <p name="artist" id="artist">
                         {{if gt (len .Members) 2}}
-                        <option value="{{.Name}} - groupe">{{.Name}} - groupe</option>
+                        <option value="{{.Name}} - groupe"> groupe</option>
                         {{else}}
-                        <option value="{{.Name}} - membre">{{.Name}} - artiste</option>
+                        <option value="{{.Name}} - membre"> artiste</option>
                         {{end}}
                     </p>
                 </label>
             </div>
         </div>
     </a>
-</li> {{end}}{{end}}
+</li>
+{{end}}{{end}}
+<script>
+    function myFunction() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+
+    function updateYearValue() {
+        document.getElementById("yearValue").innerHTML = document.getElementById("year").value;
+    }
+
+    function uncheckOthers(currentCheckbox) {
+        let checkboxes = document.getElementsByName(currentCheckbox.name);
+
+        for (let i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] !== currentCheckbox && checkboxes[i].checked) {
+                checkboxes[i].checked = false;
+            }
+        }
+    }
+
+    const bouton = document.getElementById('mon-bouton');
+    const zoneTexte = document.getElementById('ma-zone-texte');
+
+    zoneTexte.style.display = 'none';
+
+    let isHidden = true;
+
+    bouton.addEventListener('click', function() {
+        if (isHidden) {
+            zoneTexte.style.display = 'block';
+            isHidden = false;
+            bouton.style.display = 'none';
+        } else {
+            zoneTexte.style.display = 'none';
+            isHidden = true;
+        }
+    });
+
+    const input = document.getElementById('year');
+    input.addEventListener('click', function() {
+        if (isHidden) {
+            bouton.style.display = 'block';
+        }
+    });
+</script>
+<a href="/fr"
 </body>
 </html>

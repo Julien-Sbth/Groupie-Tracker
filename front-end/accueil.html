@@ -23,7 +23,10 @@
         </label>
         <button type="submit">Search</button>
     </form>
-    <button class="bouton" id="mon-bouton">Voir plus de filtre</button>
+    <center>
+        <button class="button" id="mon-bouton">Voir plus de filtre...</button>
+    </center>
+
     <form>
         <div class="zone-texte" id="ma-zone-texte">
         Nombres de personnes
@@ -47,15 +50,15 @@
         <div class="artiste-box">
             <img src="{{.ImageURL}}" alt="{{.Name}}" />
             <div class="info">
-                <p>Albums : {{.Albums}}</p>
-                <p>Pistes : {{.Tracks}}</p>
-                <p><a href="/index/{{.ID}}">Page de {{.Name}}</a></p>
+                <p>First Album : {{.FirstAlbum}}</p>
+                <p>Group Creation : {{.CreationDate}}</p>
+                <p><a href="/index/{{.ID}}">Voir plus d'info {{.Name}}</a></p>
                 <label>
                     <p name="artist" id="artist">
                         {{if gt (len .Members) 2}}
-                        <option value="{{.Name}} - groupe">{{.Name}} - groupe</option>
+                        <option value="{{.Name}} - groupe">groupe</option>
                         {{else}}
-                        <option value="{{.Name}} - membre">{{.Name}} - artiste</option>
+                        <option value="{{.Name}} - membre">artiste</option>
                         {{end}}
                     </p>
                 </label>

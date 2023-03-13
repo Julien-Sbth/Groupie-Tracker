@@ -17,6 +17,7 @@ p {
     margin: 20px 0;
 }
 a {
+
     text-decoration: none;
     color: #0080ff;
     font-weight: bold;
@@ -39,11 +40,12 @@ h3 {
     margin: 20px 0;
 }
 img {
+    padding-top: 15px;
     display: block;
     margin: 0 auto;
     max-width: 100%;
     height: auto;
-    box-shadow: 5px 5px 15px #ddd;
+    box-shadow: 15px 15px 15px #ddd;
     border-radius: 50px;
 }
 .info-container {
@@ -55,9 +57,12 @@ img {
     box-shadow: 0px 0px 15px 5px rgba(255, 255, 255, 0.5);
 }
 .artiste-box {
+    cursor: pointer;
+    padding-bottom: 20px;
     background-color: #f8f5f5;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    transition: all 0.3s ease-in-out;
 }
 .container {
     display: flex;
@@ -86,21 +91,32 @@ button[type="submit"] {
     border-radius: 5px;
     margin-left: 5px;
 }
-button{
-    cursor: pointer;
-}
 
 h1{
     display: flex;
     justify-content: center;
     align-items: center;
 }
-#ma-zone-texte {
-    display: none; /* masquer la zone de texte par défaut */
+.artiste-box:hover {
+    transform: translateY(-25px);
+    transition: 2s;
+    background-color: orange;
+}
+button.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    background-color: #0080ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
 }
 
-#mon-bouton:focus + #ma-zone-texte {
-    display: block; /* afficher la zone de texte lorsqu'on clique sur le bouton */
+button.button:hover {
+    transition: .5s;
+    background-color: #005fa3;
 }
-
-

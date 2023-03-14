@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Relation</title>
+    <title>Info de {{.Name}}</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 </head>
-<header> <h1> Dates and locations of concerts </h1> </header>
 <title>{{.Name}}</title>
 <style>
     #menu ul {
@@ -100,6 +99,7 @@
 <div id="main">
     <h1>{{.Name}}</h1>
     <img src="{{.ImageURL}}" alt="Photo de {{.Name}}">
+
     <h2>Membres du groupe</h2>
     <p>Voici les membres du groupe {{.Name}} :</p>
     <ul>
@@ -107,7 +107,6 @@
         <li>{{.}}</li>
         {{end}}
     </ul>
-    <h2>Tournées</h2>
     <h3>Artistes</h3>
     <ul>
         <li>{{.Name}}</li>
@@ -124,17 +123,16 @@
         {{end}}
     </ul>
     <p>La locations</p>
-    <h3>Location</h3>
     <ul>
         {{range .Locations}}
         <li>{{.}}</li>
         {{end}}
     </ul>
-    <p>La Relations</p>
     <h3>Relation</h3>
     <ul>
-        <p>{{.Relations}}</p>
-
+       <li>
+               {{.Relations}}
+       </li>
     </ul>
 </div>
 </body>

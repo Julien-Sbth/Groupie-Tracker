@@ -47,12 +47,13 @@
     </div>
     {{range .}}
     <li id="artist{{.ID}}">
+        <a href="/index/{{.ID}}">
         <div class="artiste-box">
             <img src="{{.ImageURL}}" alt="{{.Name}}" />
             <div class="info">
                 <p>First Album : {{.FirstAlbum}}</p>
                 <p>Group Creation : {{.CreationDate}}</p>
-                <p><a href="/index/{{.ID}}">Voir plus d'info {{.Name}}</a></p>
+                <p>Info {{.Name}}</p>
                 <label>
                     <p name="artist" id="artist">
                         {{if gt (len .Members) 2}}
@@ -64,6 +65,7 @@
                 </label>
             </div>
         </div>
+        </a>
     </li> {{end}}
     </div>
 </ul>

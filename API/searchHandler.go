@@ -57,8 +57,6 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "<option value=\"%s - membre\">%s - artiste</option>\n", artist.Name, artist.Name)
 		fmt.Fprintf(w, "{{end}}\n")
 		fmt.Fprintf(w, "</select>\n")
-		fmt.Fprintf(w, "<p>Albums : %s</p>\n", artist.Albums)
-		fmt.Fprintf(w, "<p>Pistes : %s</p>\n", artist.Tracks)
 		fmt.Fprintf(w, "<p><a href=\"/index/%d\">Page de %s</a></p>\n", artist.ID, artist.Name)
 		fmt.Fprintf(w, "</div>\n") // end div.info
 		fmt.Fprintf(w, "</div>\n") // end div.artiste-box

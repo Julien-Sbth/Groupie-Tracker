@@ -53,14 +53,14 @@ func getArtistWithDatesAndLocations(id string) (*Artist, error) {
 		return nil, fmt.Errorf("failed to decode locations response: %v", err)
 	}
 
-	relationResp, err := http.Get(relationsURL)
+	relationsResp, err := http.Get(relationsURL)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get dates: %v", err)
 	}
-	defer relationResp.Body.Close()
+	defer relationsResp.Body.Close()
 
 	var relations interface{}
-	err = json.NewDecoder(relationResp.Body).Decode(&relations)
+	err = json.NewDecoder(relationsResp.Body).Decode(&relations)
 	if err != nil {
 		return nil, fmt.Errorf("failed to decode dates response: %v", err)
 	}

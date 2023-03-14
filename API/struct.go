@@ -15,7 +15,6 @@ type Artist struct {
 	Dates          interface{} `json:"dates"`
 	Relations      interface{} `json:"relations"`
 	FirstAlbumDate string
-	Location       string
 }
 
 type SearchResult struct {

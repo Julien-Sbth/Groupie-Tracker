@@ -4,12 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"strings"
 )
-
-type Relations struct {
-	Relations interface{}
-}
 
 func getArtistWithDatesAndLocations(id string) (*Artist, error) {
 	artistURL := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/artists/%s", id)
@@ -53,34 +48,20 @@ func getArtistWithDatesAndLocations(id string) (*Artist, error) {
 		return nil, fmt.Errorf("failed to decode locations response: %v", err)
 	}
 
-	relationsResp, err := http.Get(relationsURL)
+	relationResp, err := http.Get(relationsURL)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get dates: %v", err)
 	}
-	defer relationsResp.Body.Close()
+	defer relationResp.Body.Close()
 
-	var relations interface{}
-	err = json.NewDecoder(relationsResp.Body).Decode(&relations)
+	var relations Relation
+	err = json.NewDecoder(relationResp.Body).Decode(&relations)
 	if err != nil {
 		return nil, fmt.Errorf("failed to decode dates response: %v", err)
 	}
-	relationsStr := ""
-	if relationsMap, ok := relations.(map[string]interface{}); ok {
-		var relationsArr []interface{}
-		for _, v := range relationsMap {
-			relationsArr = append(relationsArr, v)
-		}
-		relationsStrBytes, err := json.Marshal(relationsArr)
-		if err != nil {
-			return nil, fmt.Errorf("failed to marshal relations: %v", err)
-		}
-		relationsStr = string(relationsStrBytes)
-		relationsStr = strings.Replace(relationsStr, "map", "", -1)
-	}
-
 	artist.Dates = dates
 	artist.Locations = locations
-	artist.Relations = relationsStr
+	artist.Relations = relations
 
 	return &artist, nil
 }

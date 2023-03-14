@@ -26,3 +26,8 @@ type SearchResult struct {
 	Locations    interface{} `json:"locations"`
 	Image        string      `json:"image"`
 }
+
+type Relation struct {
+	ID             int                 `json:"id"`
+	LocationsDates map[string][]string `json:"datesLocations"`
+}

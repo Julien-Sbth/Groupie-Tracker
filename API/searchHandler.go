@@ -10,6 +10,8 @@ import (
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
 	searchTerm := r.FormValue("search")
 	var artists []Artist
+	suggestions := AutoCompleteSuggestions(artists, searchTerm)
+	fmt.Println(suggestions) // Juste pour vérifier les suggestions dans la console
 
 	// Retrieve artists from API
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
@@ -50,13 +52,9 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "<div class=\"artiste-box\">\n")
 		fmt.Fprintf(w, "<img src=\"%s\" alt=\"%s\" />\n", artist.ImageURL, artist.Name)
 		fmt.Fprintf(w, "<div class=\"info\">\n")
-		fmt.Fprintf(w, "<select name=\"artist\" id=\"artist\">\n")
-		fmt.Fprintf(w, "{{if gt (len .Members) 2}}\n")
-		fmt.Fprintf(w, "<option value=\"%s - groupe\">%s - groupe</option>\n", artist.Name, artist.Name)
-		fmt.Fprintf(w, "{{else}}\n")
-		fmt.Fprintf(w, "<option value=\"%s - membre\">%s - artiste</option>\n", artist.Name, artist.Name)
-		fmt.Fprintf(w, "{{end}}\n")
-		fmt.Fprintf(w, "</select>\n")
+		fmt.Fprintf(w, "<h2>%s Membre</h2>\n", artist.Name)
+		fmt.Fprintf(w, "<p>Albums : %s</p>\n", artist.Albums)
+		fmt.Fprintf(w, "<p>Pistes : %s</p>\n", artist.Tracks)
 		fmt.Fprintf(w, "<p><a href=\"/index/%d\">Page de %s</a></p>\n", artist.ID, artist.Name)
 		fmt.Fprintf(w, "</div>\n") // end div.info
 		fmt.Fprintf(w, "</div>\n") // end div.artiste-box

@@ -1,105 +1,94 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>The Artist API</title>
-    <link rel="stylesheet" type="text/css" href="/front-end/css/home.css">
+  <title>The Artist API</title>
+  <link rel="stylesheet" type="text/css" href="/front-end/css/home.css">
 <body>
 <h1 tabindex="0">The Artist API</h1>
 <center>
-    <button class="button" id="mon-bouton">boutton</button>
+  <button class="button" id="mon-bouton">boutton</button>
 </center>
 <center>
-    <div class="zone-texte" id="ma-zone-texte">
+  <div class="zone-texte" id="ma-zone-texte">
     <a href="/home">
-    <button type="button" class="accueil">
-    Voir plus d'artistes...
-    </button>
+      <button type="button" class="accueil">
+        Voir plus d'artistes...
+      </button>
     </a>
-
     <button onclick="location.reload()" class="refresh-button">Rafraichir les artistes</button>
-    </div>
+  </div>
 </center>
-
 {{range $i, $artist := .}}
 {{ if lt $i 8 }}
 <li id="artist{{$artist.ID}}">
-    <a href="/index/{{.ID}}" id="artist{{.ID}}">
-        <div class="artiste-box">
-            <img src="{{.ImageURL}}" alt="{{.Name}}" />
-            <div class="info">
-                <p>Premier Albums : {{.FirstAlbum}}</p>
-                <p>Creation groupe : {{.CreationDate}}</p>
-
-                <label>
-                    <p name="artist" id="artist">
-                        {{if gt (len .Members) 2}}
-                        <option value="{{.Name}} - groupe"> groupe</option>
-                        {{else}}
-                        <option value="{{.Name}} - membre"> artiste</option>
-                        {{end}}
-                    </p>
-                </label>
-            </div>
-        </div>
-    </a>
+  <a href="/index/{{.ID}}" id="artist{{.ID}}">
+    <div class="artiste-box">
+      <img src="{{.ImageURL}}" alt="{{.Name}}" />
+      <div class="info">
+        <p>Premier Albums : {{.FirstAlbum}}</p>
+        <p>Creation groupe : {{.CreationDate}}</p>
+        <label>
+          <p name="artist" id="artist">
+            {{if gt (len .Members) 2}}
+            <option value="{{.Name}} - groupe"> groupe</option>
+            {{else}}
+            <option value="{{.Name}} - membre"> artiste</option>
+            {{end}}
+          </p>
+        </label>
+      </div>
+    </div>
+  </a>
 </li>
 {{end}}{{end}}
 <script>
-    function myFunction() {
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("myUL");
-        li = ul.getElementsByTagName("li");
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName("a")[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "";
-            } else {
-                li[i].style.display = "none";
-            }
-        }
+  function myFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+      a = li[i].getElementsByTagName("a")[0];
+      txtValue = a.textContent || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
     }
-
-    function updateYearValue() {
-        document.getElementById("yearValue").innerHTML = document.getElementById("year").value;
+  }
+  function updateYearValue() {
+    document.getElementById("yearValue").innerHTML = document.getElementById("year").value;
+  }
+  function uncheckOthers(currentCheckbox) {
+    let checkboxes = document.getElementsByName(currentCheckbox.name);
+    for (let i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i] !== currentCheckbox && checkboxes[i].checked) {
+        checkboxes[i].checked = false;
+      }
     }
-
-    function uncheckOthers(currentCheckbox) {
-        let checkboxes = document.getElementsByName(currentCheckbox.name);
-
-        for (let i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i] !== currentCheckbox && checkboxes[i].checked) {
-                checkboxes[i].checked = false;
-            }
-        }
+  }
+  const bouton = document.getElementById('mon-bouton');
+  const zoneTexte = document.getElementById('ma-zone-texte');
+  zoneTexte.style.display = 'none';
+  let isHidden = true;
+  bouton.addEventListener('click', function() {
+    if (isHidden) {
+      zoneTexte.style.display = 'block';
+      isHidden = false;
+      bouton.style.display = 'none';
+    } else {
+      zoneTexte.style.display = 'none';
+      isHidden = true;
     }
-
-    const bouton = document.getElementById('mon-bouton');
-    const zoneTexte = document.getElementById('ma-zone-texte');
-
-    zoneTexte.style.display = 'none';
-
-    let isHidden = true;
-
-    bouton.addEventListener('click', function() {
-        if (isHidden) {
-            zoneTexte.style.display = 'block';
-            isHidden = false;
-            bouton.style.display = 'none';
-        } else {
-            zoneTexte.style.display = 'none';
-            isHidden = true;
-        }
-    });
-
-    const input = document.getElementById('year');
-    input.addEventListener('click', function() {
-        if (isHidden) {
-            bouton.style.display = 'block';
-        }
-    });
+  });
+  const input = document.getElementById('year');
+  input.addEventListener('click', function() {
+    if (isHidden) {
+      bouton.style.display = 'block';
+    }
+  });
 </script>
 </body>
 </html>

@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
-
 body {
     margin: 0;
     padding: 0;
@@ -20,7 +19,6 @@ header > div:last-child {
 header a {
     margin-left: auto;
 }
-
 h1 {
     text-align: center;
     margin-top: 50px;
@@ -106,7 +104,6 @@ h1{
     text-align: center;
 }
 .artiste-box:hover {
-
     transform: translateY(-25px);
     transition: 2s;
     background-color: orange;
@@ -141,7 +138,6 @@ button.refresh-button {
     font-size: 18px;
     cursor: pointer;
 }
-
 button.refresh-button:hover {
     transition: .5s;
     background-color: #005fa3;

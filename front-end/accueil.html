@@ -10,25 +10,23 @@
     <form action="/search" method="get">
         <label>
             <label>
-                <input type="text" placeholder="Search" name="search"  list="suggestions">
+                <input type="text" required placeholder="Search" name="search" list="suggestions" id="search" onkeyup="myFunction()">
             </label>
+
             <datalist id="suggestions">
                 {{range .}}
-                <ul id="myUL">
-                    <li><a href="#"></a></li>
-                </ul>
-                <option value="{{.Name}}">
-                    {{end}}
+                <option value="{{if gt (len .Members) 2}} {{.Name}} - groupe {{else}} {{.Name}} - artiste {{end}}">
+
+                {{end}}
             </datalist>
         </label>
         <button type="submit">Search</button>
     </form>
     <center>
-        <button class="button" id="mon-bouton">Voir plus de filtre...</button>
+        <button class="bouton" id="mon-bouton">Voir plus de filtre</button>
     </center>
-
+    <div class="zone-texte" id="ma-zone-texte">
     <form>
-        <div class="zone-texte" id="ma-zone-texte">
         Nombres de personnes
         <label><input type="checkbox" name="option1" value="1" onclick="uncheckOthers(this)">1</label>
         <label><input type="checkbox" name="option1" value="1" onclick="uncheckOthers(this)">2</label>
@@ -42,7 +40,6 @@
             <label for="year">Sélectionner une année :</label>
             <input type="range" id="year" name="year" min="1950" max="2023" oninput="updateYearValue()">
             <span id="yearValue">1800</span>
-
         </form>
     </div>
     {{range .}}
@@ -51,15 +48,16 @@
         <div class="artiste-box">
             <img src="{{.ImageURL}}" alt="{{.Name}}" />
             <div class="info">
-                <p>First Album : {{.FirstAlbum}}</p>
-                <p>Group Creation : {{.CreationDate}}</p>
-                <p>Info {{.Name}}</p>
+                <p>{{.Name}}</p>
+                <p>First Albums : {{.FirstAlbum}}</p>
+                <p>Creation Group: {{.CreationDate}}</p>
+                <p></p>
                 <label>
                     <p name="artist" id="artist">
                         {{if gt (len .Members) 2}}
-                        <option value="{{.Name}} - groupe">groupe</option>
+                        <option value="{{.Name}} - groupe">{{.Name}} - groupe</option>
                         {{else}}
-                        <option value="{{.Name}} - membre">artiste</option>
+                        <option value="{{.Name}} - artiste">{{.Name}} - artiste</option>
                         {{end}}
                     </p>
                 </label>
@@ -67,9 +65,47 @@
         </div>
         </a>
     </li> {{end}}
-    </div>
 </ul>
-    <script src="front-end/js/accueil.js"></script>
+    <script src="/front-end/js/accueil.js"></script>
+<script>
+    function updateYearValue() {
+        document.getElementById("yearValue").innerHTML = document.getElementById("year").value;
+    }
+
+    function uncheckOthers(currentCheckbox) {
+        let checkboxes = document.getElementsByName(currentCheckbox.name);
+
+        for (let i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] !== currentCheckbox && checkboxes[i].checked) {
+                checkboxes[i].checked = false;
+            }
+        }
+    }
+
+    const bouton = document.getElementById('mon-bouton');
+    const zoneTexte = document.getElementById('ma-zone-texte');
+
+    zoneTexte.style.display = 'none';
+
+    let isHidden = true;
+
+    bouton.addEventListener('click', function() {
+        if (isHidden) {
+            zoneTexte.style.display = 'block';
+            isHidden = false;
+            bouton.style.display = 'none';
+        } else {
+            zoneTexte.style.display = 'none';
+            isHidden = true;
+        }
+    });
+
+    const input = document.getElementById('year');
+    input.addEventListener('click', function() {
+        if (isHidden) {
+            bouton.style.display = 'block';
+        }
+    });
+</script>
 </body>
 </html>
-

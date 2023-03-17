@@ -1,59 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/front-end/css/artiste.css">
-<title>{{.Name}}</title>
+    <link rel="shortut icon" href="img/cassette-tape.png" type="images/png"/>
+    <title>{{.Name}}</title>
 </head>
-<style>
-
-</style>
 <body>
-<div id="main">
-    <h1>{{.Name}}</h1>
-    <img src="{{.ImageURL}}" alt="Photo de {{.Name}}">
-    <h2>Membres du groupe</h2>
-    <p>Voici les membres du groupe {{.Name}} :</p>
-    <ul>
-        {{range .Members}}
-        <li>{{.}}</li>
-        {{end}}
-    </ul>
-    <h2>Tournées</h2>
-    <h3>Artistes</h3>
-    <ul>
-        <li>{{.Name}}</li>
-    </ul>
-    <h3>Premier Albums</h3>
-    <ul>
-        <li>{{.FirstAlbum}}</li>
-    </ul>
-    <h3>Dates</h3>
-    <p>Voici les dates de concerts:</p>
-    <ul>
-        {{range .Dates}}
-        <li>{{.}}</li>
-        {{end}}
-    </ul>
-    <p>La locations</p>
-    <h3>Location</h3>
-    <ul>
-        {{range .Locations}}
-        <li>{{.}}</li>
-        {{end}}
-    </ul>
-    <p>La Relations</p>
-    <h3>Relation</h3>
-    <ul>
-        {{range .Relations.LocationsDates}}
-        <li>{{.}}</li>
-        {{end}}
-    </ul>
+    <div id="main">
+        <h1>{{.Name}}</h1>
+        <img src="{{.ImageURL}}" alt="Photo de {{.Name}}">
+        <div id="link" style="text-align: center; padding: 5px 10px; margin-top: 15px"><a href="/lofi/{{.ID}}"><button>Lofi version</button></a></div>
 
-    <a href="/lofi/{{.ID}}">
-        <button type="submit">
-            Lofi
-        </button>
-    </a>
-</div>
+
+        <h3>{{if gt (len .Members) 2}}Membres du groupe{{else}}Nom de l'artiste{{end}}</h3>
+        <ul>
+            {{range .Members}}
+            <li>{{.}}</li>
+            {{end}}
+        </ul>
+
+
+        <h3>Premier Albums</h3>
+        <ul>
+            <li>{{.FirstAlbum}}</li>
+        </ul>
+
+
+        <h3>Lieux et dates de concert</h3>
+        <ul>
+            {{range .Relations.LocationsDates}}
+            <li>{{.}}</li>
+            {{end}}
+        </ul>
+    </div>
+</body>
+</html>
